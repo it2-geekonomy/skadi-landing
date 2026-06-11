@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import { useRouter } from "next/navigation";
 
 const benefits = [
   "Live 15-minute walkthrough",
@@ -58,13 +59,12 @@ function ContactGlow() {
 }
 
 export default function Contact() {
+  const router = useRouter();
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
-  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">(
-    "idle",
-  );
+  const [status, setStatus] = useState<"idle" | "loading" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("");
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -87,11 +87,7 @@ export default function Contact() {
         return;
       }
 
-      setStatus("success");
-      setFirstName("");
-      setLastName("");
-      setPhone("");
-      setEmail("");
+      router.push("/thank-you");
     } catch {
       setStatus("error");
       setErrorMessage("Something went wrong. Please try again.");
@@ -138,18 +134,7 @@ export default function Contact() {
               We&apos;ll reach out within one business day to schedule.
             </p>
 
-            {status === "success" ? (
-              <div className="mt-8 rounded-xl border border-[#6e964f]/30 bg-[#6e964f]/10 p-6">
-                <p className="text-base font-medium text-white">
-                  Request received!
-                </p>
-                <p className="mt-2 text-[15px] text-skadi-muted">
-                  We&apos;ll reach out within one business day to schedule your
-                  demo.
-                </p>
-              </div>
-            ) : (
-              <form className="mt-6 sm:mt-8" onSubmit={handleSubmit}>
+            <form className="mt-6 sm:mt-8" onSubmit={handleSubmit}>
                 <div className="mb-[18px] flex flex-col gap-[18px] sm:flex-row sm:gap-4">
                   <div className="form-group relative min-w-0 flex-1">
                     <label htmlFor="firstName">First Name</label>
@@ -218,8 +203,7 @@ export default function Contact() {
                 >
                   {status === "loading" ? "Submitting..." : "Book a Free Demo"}
                 </button>
-              </form>
-            )}
+            </form>
           </div>
           </div>
         </div>

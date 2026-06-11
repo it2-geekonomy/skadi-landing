@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
+import { GoogleAnalytics } from "@/components/GoogleAnalytics";
+import { MetaPixel } from "@/components/MetaPixel";
 import {
   GoogleTagManagerBody,
   GoogleTagManagerHead,
@@ -25,6 +27,9 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <GoogleTagManagerHead />
+        <GoogleAnalytics />
+        {/* Meta Pixel base code — below other head scripts, above </head> */}
+        <MetaPixel />
       </head>
       <body className={`${jakarta.variable} font-jakarta antialiased`}>
         <GoogleTagManagerBody />
