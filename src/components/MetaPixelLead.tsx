@@ -1,13 +1,18 @@
-"use client";
+import Script from "next/script";
 
-import { useEffect } from "react";
-
+/** Fires Lead on thank-you — retries until fbq is ready (matches manager's snippet). */
 export function MetaPixelLead() {
-  useEffect(() => {
-    if (typeof window.fbq === "function") {
-      window.fbq("track", "Lead");
-    }
-  }, []);
-
-  return null;
+  return (
+    <Script id="meta-pixel-lead" strategy="afterInteractive">
+      {`(function retryLead(attempt) {
+  if (typeof window.fbq === "function") {
+    window.fbq("track", "Lead");
+    return;
+  }
+  if (attempt < 40) {
+    setTimeout(function () { retryLead(attempt + 1); }, 100);
+  }
+})(0);`}
+    </Script>
+  );
 }
