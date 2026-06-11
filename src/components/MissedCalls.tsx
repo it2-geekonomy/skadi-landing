@@ -90,7 +90,7 @@ function StatCard({
   icon,
 }: (typeof stats)[0]) {
   return (
-    <div className={`${glassCard} h-[319px] w-[221px] shrink-0 p-[22px_18px]`}>
+    <div className={`${glassCard} flex h-[319px] w-[221px] shrink-0 flex-col p-[22px_18px] lg:h-full lg:min-h-[319px]`}>
       <div className="mb-7 flex h-12 w-12 items-center justify-center rounded-3xl border border-[#6e964f]/20 bg-[rgba(37,77,44,0.35)] shadow-[0_0_16px_rgba(110,150,79,0.12)]">
         <svg
           viewBox="0 0 24 24"
@@ -189,7 +189,7 @@ function FlowMobile() {
 function FlowDesktop() {
   return (
     <>
-      <div className={`${flowGrid} hidden flex-1 content-start sm:grid`}>
+      <div className={`${flowGrid} hidden content-start sm:grid`}>
         {flowSteps.flatMap((step, i) => {
           const stepCell = (
             <FlowStepCell
@@ -306,15 +306,15 @@ export default function MissedCalls() {
           </p>
         </div>
 
-        <div className="relative z-[2] flex flex-col items-center gap-[18px] lg:flex-row lg:items-stretch lg:justify-center">
-          <div className="flex flex-col gap-[18px] sm:flex-row">
+        <div className="relative z-[2] flex w-full flex-col items-center gap-6 lg:flex-row lg:items-stretch lg:justify-center lg:gap-[18px]">
+          <div className="flex flex-col items-center gap-[18px] sm:flex-row sm:flex-wrap sm:justify-center lg:shrink-0 lg:flex-nowrap lg:items-stretch lg:self-stretch">
             {stats.map((s) => (
               <StatCard key={s.label} {...s} />
             ))}
           </div>
 
           <div
-            className={`${glassCard} flex w-full min-w-0 flex-1 flex-col px-5 py-8 sm:h-[319px] sm:px-8 sm:py-10 lg:max-w-[962px]`}
+            className={`${glassCard} flex w-full min-w-0 flex-col justify-center px-5 py-8 sm:px-8 sm:py-10 lg:min-h-[319px] lg:min-w-0 lg:flex-1 lg:max-w-[962px]`}
           >
             <FlowMobile />
             <FlowDesktop />
