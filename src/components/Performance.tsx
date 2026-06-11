@@ -40,10 +40,10 @@ function MetricCell({
 }) {
   return (
     <div className={`min-w-0 ${className}`}>
-      <p className="text-[36px] font-normal leading-none tracking-[-0.5px] text-white sm:text-[40px] lg:text-[46px] 2xl:text-[50px]">
+      <p className="text-[36px] font-normal leading-none tracking-[-0.5px] text-white sm:text-[40px] lg:text-[30px] xl:text-[34px] 2xl:text-[50px]">
         {value}
       </p>
-      <p className="mt-3 text-[14px] leading-snug text-skadi-muted lg:mt-4">
+      <p className="mt-2 text-[12px] leading-snug text-skadi-muted sm:mt-3 sm:text-[14px] lg:mt-3 2xl:mt-4">
         {label}
       </p>
     </div>
@@ -62,7 +62,7 @@ function MetricsMobileGrid() {
 
 function MetricsFlexRow() {
   return (
-    <div className="flex w-full items-stretch">
+    <div className="flex w-full min-w-0 items-stretch">
       {metrics.flatMap((m, i) => {
         const widthClass =
           i === 2 ? "flex-[1.35]" : i === 3 ? "flex-[0.85]" : "flex-1";
@@ -74,10 +74,10 @@ function MetricsFlexRow() {
             label={m.label}
             className={`${widthClass} ${
               i === 0
-                ? "pr-3 2xl:pr-5"
+                ? "pr-1 sm:pr-3 lg:pr-2 xl:pr-4 2xl:pr-5"
                 : i === metrics.length - 1
-                  ? "pl-3 2xl:pl-5"
-                  : "px-3 2xl:px-5"
+                  ? "pl-1 sm:pl-3 lg:pl-2 xl:pl-4 2xl:pl-5"
+                  : "px-1 sm:px-3 lg:px-2 xl:px-4 2xl:px-5"
             }`}
           />
         );
@@ -87,7 +87,7 @@ function MetricsFlexRow() {
             cell,
             <div
               key={`divider-${m.label}`}
-              className="mx-2 w-px shrink-0 self-stretch bg-white/[0.1] 2xl:mx-5"
+              className="mx-1 w-px shrink-0 self-stretch bg-white/[0.1] sm:mx-2 lg:mx-2 xl:mx-4 2xl:mx-5"
               aria-hidden="true"
             />,
           ];
@@ -95,25 +95,6 @@ function MetricsFlexRow() {
 
         return [cell];
       })}
-    </div>
-  );
-}
-
-function MetricsWideGrid() {
-  return (
-    <div className="grid grid-cols-4 gap-x-6 lg:gap-x-8">
-      {metrics.map((m, i) => (
-        <div
-          key={m.label}
-          className={`relative min-w-0 ${
-            i > 0
-              ? "before:absolute before:-left-3 before:top-0 before:h-full before:w-px before:bg-white/[0.1] lg:before:-left-4"
-              : ""
-          }`}
-        >
-          <MetricCell value={m.value} label={m.label} />
-        </div>
-      ))}
     </div>
   );
 }
@@ -173,16 +154,13 @@ export default function Performance() {
                 </p>
               </div>
 
-              {/* Mobile & tablet — metrics under copy */}
+              {/* Mobile */}
               <div className="mt-auto w-full pt-14 sm:hidden">
                 <MetricsMobileGrid />
               </div>
-              <div className="mt-auto hidden w-full pt-14 sm:block lg:hidden">
-                <MetricsFlexRow />
-              </div>
 
-              {/* Wide desktop — metrics inside left column */}
-              <div className="mt-auto hidden w-full pt-20 2xl:block">
+              {/* Tablet, laptop & desktop — metrics inside left column */}
+              <div className="mt-auto hidden w-full pt-14 sm:block lg:pt-16 2xl:pt-20">
                 <MetricsFlexRow />
               </div>
             </div>
@@ -207,11 +185,6 @@ export default function Performance() {
                 </div>
               ))}
             </div>
-          </div>
-
-          {/* Laptop & medium desktop — full-width metrics (lg–2xl) */}
-          <div className="relative z-[1] hidden w-full pt-16 lg:block 2xl:hidden">
-            <MetricsWideGrid />
           </div>
         </div>
       </div>
