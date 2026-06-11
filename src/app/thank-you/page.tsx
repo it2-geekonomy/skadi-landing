@@ -14,14 +14,14 @@ export default function ThankYouPage() {
     <>
       <MetaPixelLead />
 
-      <main className="flex min-h-screen flex-col items-center justify-center bg-[#080e07] px-6 py-10 text-center">
+      <main className="flex min-h-screen flex-col items-center justify-center bg-[#080e07] px-6 py-10 text-center font-jakarta text-white">
         <Link href="/" className="mb-12 inline-block">
           <Image
-            src="/images/Skadi Logo.svg"
+            src="/images/Group.png"
             alt="Skadi"
             width={90}
-            height={33}
-            className="h-8 w-auto"
+            height={32}
+            className="h-8 w-auto brightness-0 invert"
             priority
           />
         </Link>
@@ -40,18 +40,16 @@ export default function ThankYouPage() {
           </svg>
         </div>
 
-        <h1 className="text-[clamp(28px,6vw,42px)] font-semibold tracking-[-0.02em] text-white">
-          Thank you!
+        <h1 className="text-[32px] font-normal leading-tight tracking-[-1px] sm:text-[42px]">
+          Thank{" "}
+          <span className="serif-italic gradient-serif">you!</span>
         </h1>
-        <p className="mx-auto mt-3.5 max-w-[360px] text-base leading-relaxed text-skadi-muted">
+        <p className="mx-auto mt-4 max-w-[360px] text-[15px] leading-relaxed text-skadi-muted sm:text-base">
           We&apos;ve received your demo request and will be in touch within one
           business day.
         </p>
 
-        <Link
-          href="/"
-          className="btn-demo mt-9 inline-block px-7 py-3 text-sm font-semibold"
-        >
+        <Link href="/" className="btn-demo mt-9 inline-block px-7 py-3">
           Back to Home
         </Link>
       </main>
