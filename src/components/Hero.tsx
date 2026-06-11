@@ -32,46 +32,29 @@ const mediumStars = [
   { top: "75%", left: "11%", size: 14, opacity: 0.54 },
 ];
 
-function TwinkleStar({
+function VectorStar({
   top,
   left,
   size,
+  opacity = 1,
 }: {
   top: string;
   left: string;
   size: number;
+  opacity?: number;
 }) {
   return (
     <div
       className="absolute"
-      style={{ top, left, width: size, height: size }}
+      style={{ top, left, width: size, height: size, opacity }}
       aria-hidden="true"
     >
-      {/* cross sparkle */}
-      <div
-        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white"
-        style={{
-          width: Math.max(2, size * 0.18),
-          height: Math.max(2, size * 0.18),
-          boxShadow: `0 0 ${size * 0.6}px rgba(255,255,255,0.9)`,
-        }}
-      />
-      <div
-        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white/70"
-        style={{ width: size, height: 1 }}
-      />
-      <div
-        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white/70"
-        style={{ width: 1, height: size }}
-      />
-      {/* diagonal rays */}
-      <div
-        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rotate-45 bg-white/35"
-        style={{ width: size * 0.7, height: 1 }}
-      />
-      <div
-        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 -rotate-45 bg-white/35"
-        style={{ width: size * 0.7, height: 1 }}
+      <Image
+        src="/images/Vector.svg"
+        alt=""
+        width={size}
+        height={size}
+        className="h-full w-full"
       />
     </div>
   );
@@ -98,25 +81,11 @@ function HeroStars() {
       ))}
 
       {mediumStars.map((star, i) => (
-        <div
-          key={`med-${i}`}
-          className="absolute rounded-full bg-white"
-          style={{
-            top: star.top,
-            left: star.left,
-            width: star.size,
-            height: star.size,
-            opacity: star.opacity,
-            boxShadow:
-              star.size <= 6
-                ? `0 0 ${star.size}px rgba(255,255,255,0.5)`
-                : undefined,
-          }}
-        />
+        <VectorStar key={`med-${i}`} {...star} />
       ))}
 
       {twinkleStars.map((star, i) => (
-        <TwinkleStar key={`twinkle-${i}`} {...star} />
+        <VectorStar key={`twinkle-${i}`} {...star} />
       ))}
     </div>
   );
@@ -133,16 +102,14 @@ export default function Hero() {
 
       <div className="relative z-[2] mx-auto flex min-h-[calc(100vh-68px)] max-w-[820px] flex-col items-center justify-center px-6">
         <div className="hero-eyebrow">
-          <svg
-            viewBox="0 0 12 12"
-            fill="none"
+          <Image
+            src="/images/Vector green.svg"
+            alt=""
+            width={11}
+            height={11}
             className="h-[11px] w-[11px] shrink-0"
-          >
-            <path
-              d="M6 1L7.2 4.8H11L8 7.2L9.2 11L6 8.6L2.8 11L4 7.2L1 4.8H4.8L6 1Z"
-              fill="#6e964f"
-            />
-          </svg>
+            aria-hidden
+          />
           AI Voice Agent for Growing Businesses
         </div>
 

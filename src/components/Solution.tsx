@@ -15,7 +15,7 @@ const particles = [
 
 function IconBadge({ children }: { children: React.ReactNode }) {
   return (
-    <span className="mx-1 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#6e964f] align-middle shadow-[0_0_20px_rgba(110,150,79,0.45)] sm:mx-1.5 sm:h-9 sm:w-9">
+    <span className="mx-0.5 inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#5a7342] align-middle shadow-[0_0_8px_rgba(110,150,79,0.15)] sm:mx-1 sm:h-8 sm:w-8 md:mx-1.5 md:h-9 md:w-9">
       {children}
     </span>
   );
@@ -24,8 +24,8 @@ function IconBadge({ children }: { children: React.ReactNode }) {
 function GridPattern({ side }: { side: "left" | "right" }) {
   return (
     <div
-      className={`pointer-events-none absolute inset-y-0 z-0 w-[min(320px,38%)] ${
-        side === "left" ? "left-0" : "right-0"
+      className={`pointer-events-none absolute inset-y-0 z-0 w-[min(200px,45%)] sm:w-[min(280px,40%)] md:w-[min(320px,38%)] ${
+        side === "left" ? "left-0" : "right-0 hidden sm:block"
       }`}
       style={{
         backgroundImage: `
@@ -49,7 +49,13 @@ function GridPattern({ side }: { side: "left" | "right" }) {
 
 export default function Solution() {
   return (
-    <section className="relative overflow-hidden bg-black py-20 text-center sm:py-24 lg:py-28">
+    <section
+      className="relative overflow-hidden py-14 text-center sm:py-20 md:py-24 lg:py-28"
+      style={{
+        background:
+          "linear-gradient(180deg, rgba(44, 59, 38, 0) 0%, #141614 42%, #08090F 100%)",
+      }}
+    >
       <GridPattern side="left" />
       <GridPattern side="right" />
 
@@ -69,39 +75,44 @@ export default function Solution() {
       ))}
 
       <div className="container-main relative z-[1]">
-        <div className="mx-auto max-w-[1120px] px-6 py-14 sm:px-10 sm:py-16 lg:px-14 lg:py-20">
-          <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-4 py-1.5 text-xs font-light text-white/90 backdrop-blur-md sm:text-[13px]">
-            <span className="h-2 w-2 shrink-0 rounded-full bg-[#6e964f] shadow-[0_0_8px_rgba(110,150,79,0.8)]" />
-            Solution · AI Voice Agent for Service Businesses
+        <div className="mx-auto max-w-[1120px] py-8 sm:py-14 md:py-16 lg:py-20">
+          <div className="mx-auto mb-6 inline-flex max-w-[min(100%,340px)] flex-wrap items-center justify-center gap-x-2 gap-y-1 rounded-full border border-white/10 bg-white/[0.04] px-3.5 py-2 text-[11px] font-light leading-snug text-white/90 backdrop-blur-md sm:mb-8 sm:max-w-none sm:gap-2 sm:px-4 sm:py-1.5 sm:text-xs md:text-[13px]">
+            <span className="flex shrink-0 items-center gap-2">
+              <span className="h-2 w-2 shrink-0 rounded-full bg-[#6e964f] shadow-[0_0_6px_rgba(110,150,79,0.5)]" />
+              <span>Solution · AI Voice Agent</span>
+            </span>
+            <span className="hidden sm:inline">for Service Businesses</span>
+            <span className="w-full text-center sm:hidden">
+              for Service Businesses
+            </span>
           </div>
 
-          <p className="mx-auto max-w-[980px] text-[22px] font-medium leading-[1.45] tracking-[-0.02em] sm:text-[26px] lg:text-[32px]">
+          <p className="mx-auto max-w-[980px] px-1 text-[18px] font-medium leading-[1.55] tracking-[-0.01em] sm:px-0 sm:text-[22px] sm:leading-[1.5] md:text-[26px] lg:text-[32px] lg:leading-[1.45] lg:tracking-[-0.02em]">
             <span className="text-white">
               Skadi answers every call,
               <IconBadge>
                 <PhoneCall
-                  className="h-4 w-4 text-white sm:h-[18px] sm:w-[18px]"
+                  className="h-3.5 w-3.5 text-white sm:h-4 sm:w-4 md:h-[18px] md:w-[18px]"
                   strokeWidth={2}
                 />
               </IconBadge>
               qualifies every lead,
               <IconBadge>
                 <UserCheck
-                  className="h-4 w-4 text-white sm:h-[18px] sm:w-[18px]"
+                  className="h-3.5 w-3.5 text-white sm:h-4 sm:w-4 md:h-[18px] md:w-[18px]"
                   strokeWidth={2}
                 />
               </IconBadge>
               and books
               <IconBadge>
                 <CalendarCheck
-                  className="h-4 w-4 text-white sm:h-[18px] sm:w-[18px]"
+                  className="h-3.5 w-3.5 text-white sm:h-4 sm:w-4 md:h-[18px] md:w-[18px]"
                   strokeWidth={2}
                 />
               </IconBadge>
               every opportunity —
             </span>
-            <span className="text-white/45">
-              {" "}
+            <span className="mt-2 block text-white/45 sm:mt-0 sm:inline">
               helping you capture more revenue without hiring more staff.
             </span>
           </p>

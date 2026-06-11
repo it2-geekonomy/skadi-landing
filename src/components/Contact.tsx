@@ -99,19 +99,19 @@ export default function Contact() {
   }
 
   return (
-    <section id="demo" className="pb-[140px] pt-[100px]">
+    <section id="demo" className="bg-black pb-20 pt-16 sm:pb-[140px] sm:pt-[100px]">
       <div className="container-main">
-        <div className="relative overflow-hidden rounded-3xl border border-white/[0.08] bg-black p-10 lg:p-20">
+        <div className="relative overflow-hidden rounded-2xl border border-white/[0.08] bg-black p-5 sm:rounded-3xl sm:p-8 lg:p-20">
           <ContactGlow />
           <ContactGrid />
 
-          <div className="relative z-[2] flex flex-col gap-[60px] lg:flex-row">
-          <div className="flex-1">
+          <div className="relative z-[2] flex flex-col gap-10 lg:flex-row lg:gap-[60px]">
+            <div className="min-w-0 flex-1">
             <div className="badge">
               <span className="badge-dot" />
               Book a Free Demo
             </div>
-            <h2 className="mt-4 text-[32px] font-normal leading-tight tracking-[-1px] sm:text-[42px]">
+            <h2 className="mt-4 text-[28px] font-normal leading-tight tracking-[-1px] sm:text-[38px] lg:text-[42px]">
               See Skadi live in{" "}
               <span className="serif-italic gradient-serif">15 minutes.</span>
             </h2>
@@ -119,11 +119,11 @@ export default function Contact() {
               No pitch decks. No slides. We&apos;ll show you Skadi handling real
               calls for businesses in your industry, then set it up for yours.
             </p>
-            <ul className="mt-10 flex flex-col gap-3.5">
+            <ul className="mt-8 flex flex-col gap-3.5 sm:mt-10">
               {benefits.map((b) => (
                 <li
                   key={b}
-                  className="flex items-start gap-3 text-base font-light text-skadi-muted"
+                  className="flex items-start gap-3 text-[15px] font-light text-skadi-muted sm:text-base"
                 >
                   <TickIcon />
                   {b}
@@ -132,9 +132,9 @@ export default function Contact() {
             </ul>
           </div>
 
-          <div className="w-full shrink-0 rounded-[18px] border border-white/10 bg-[#0a0a0a]/75 p-10 backdrop-blur-sm lg:w-[480px]">
-            <h3 className="text-[26px] font-medium">Request Your Demo</h3>
-            <p className="mt-2 text-[15px] text-skadi-muted">
+          <div className="w-full min-w-0 shrink-0 rounded-[18px] border border-white/10 bg-[#0a0a0a]/75 p-6 backdrop-blur-sm sm:p-8 lg:w-[540px] lg:p-10">
+            <h3 className="text-[22px] font-medium sm:text-[26px]">Request Your Demo</h3>
+            <p className="mt-2 text-[14px] text-skadi-muted sm:text-[15px]">
               We&apos;ll reach out within one business day to schedule.
             </p>
 
@@ -149,9 +149,9 @@ export default function Contact() {
                 </p>
               </div>
             ) : (
-              <form className="mt-8" onSubmit={handleSubmit}>
-                <div className="mb-[18px] flex gap-4">
-                  <div className="relative flex-1">
+              <form className="mt-6 sm:mt-8" onSubmit={handleSubmit}>
+                <div className="mb-[18px] flex flex-col gap-[18px] sm:flex-row sm:gap-4">
+                  <div className="form-group relative min-w-0 flex-1">
                     <label htmlFor="firstName">First Name</label>
                     <input
                       id="firstName"
@@ -164,7 +164,7 @@ export default function Contact() {
                       disabled={status === "loading"}
                     />
                   </div>
-                  <div className="relative flex-1">
+                  <div className="form-group relative min-w-0 flex-1">
                     <label htmlFor="lastName">Last Name</label>
                     <input
                       id="lastName"
@@ -178,7 +178,7 @@ export default function Contact() {
                     />
                   </div>
                 </div>
-                <div className="relative mb-[18px]">
+                <div className="form-group relative mb-[18px]">
                   <label htmlFor="phone">Mobile Number</label>
                   <input
                     id="phone"
@@ -191,7 +191,7 @@ export default function Contact() {
                     disabled={status === "loading"}
                   />
                 </div>
-                <div className="relative mb-2">
+                <div className="form-group relative mb-2">
                   <label htmlFor="email">Business Email</label>
                   <input
                     id="email"
@@ -213,7 +213,7 @@ export default function Contact() {
 
                 <button
                   type="submit"
-                  className="btn-demo mt-2 w-full py-4 disabled:cursor-not-allowed disabled:opacity-60"
+                  className="btn-demo mt-2 w-full py-3.5 sm:py-4 disabled:cursor-not-allowed disabled:opacity-60"
                   disabled={status === "loading"}
                 >
                   {status === "loading" ? "Submitting..." : "Book a Free Demo"}

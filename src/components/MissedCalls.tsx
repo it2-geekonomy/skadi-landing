@@ -111,14 +111,105 @@ function StatCard({
   );
 }
 
-function FlowArrow() {
+function FlowStepCell({
+  lines,
+  image,
+  compact = false,
+}: {
+  lines: string[];
+  image: string;
+  compact?: boolean;
+}) {
+  const iconSize = compact ? 64 : 98;
+  return (
+    <div className="flex flex-col items-center">
+      <Image
+        src={image}
+        alt={lines.join(" ")}
+        width={iconSize}
+        height={iconSize}
+        className={`shrink-0 ${compact ? "h-16 w-16" : "h-[98px] w-[98px]"}`}
+      />
+      <p
+        className={`mt-2 text-center font-medium leading-snug text-white ${
+          compact ? "text-[13px]" : "mt-3 text-base"
+        }`}
+      >
+        {lines[0]}
+        <br />
+        {lines[1]}
+      </p>
+    </div>
+  );
+}
+
+function FlowArrow({
+  vertical = false,
+  compact = false,
+}: {
+  vertical?: boolean;
+  compact?: boolean;
+}) {
   return (
     <span
-      className="mt-[42px] w-[1.125rem] shrink-0 text-center text-base text-white/35"
+      className={`shrink-0 text-center text-white/35 ${
+        vertical
+          ? "py-1 text-sm"
+          : compact
+            ? "self-center pt-6 text-sm"
+            : "mt-[42px] w-[1.125rem] text-base"
+      }`}
       aria-hidden="true"
     >
-      →
+      {vertical ? "↓" : "→"}
     </span>
+  );
+}
+
+function FlowMobile() {
+  return (
+    <div className="flex flex-col gap-4 sm:hidden">
+      <div className="grid grid-cols-[1fr_auto_1fr] items-start gap-x-2">
+        <FlowStepCell {...flowSteps[0]} compact />
+        <FlowArrow compact />
+        <FlowStepCell {...flowSteps[1]} compact />
+      </div>
+      <div className="flex justify-center">
+        <FlowArrow vertical />
+      </div>
+      <div className="grid grid-cols-[1fr_auto_1fr] items-start gap-x-2">
+        <FlowStepCell {...flowSteps[2]} compact />
+        <FlowArrow compact />
+        <FlowStepCell {...flowSteps[3]} compact />
+      </div>
+    </div>
+  );
+}
+
+function FlowDesktop() {
+  return (
+    <>
+      <div className={`${flowGrid} hidden flex-1 content-start sm:grid`}>
+        {flowSteps.flatMap((step, i) => {
+          const stepCell = (
+            <FlowStepCell
+              key={step.lines.join(" ")}
+              lines={step.lines}
+              image={step.image}
+            />
+          );
+
+          if (i < flowSteps.length - 1) {
+            return [stepCell, <FlowArrow key={`arrow-${i}`} />];
+          }
+
+          return [stepCell];
+        })}
+      </div>
+      <div className="hidden sm:block">
+        <FlowConnector />
+      </div>
+    </>
   );
 }
 
@@ -223,39 +314,10 @@ export default function MissedCalls() {
           </div>
 
           <div
-            className={`${glassCard} flex h-[319px] w-full min-w-0 flex-1 flex-col px-8 py-10 lg:max-w-[962px]`}
+            className={`${glassCard} flex w-full min-w-0 flex-1 flex-col px-5 py-8 sm:h-[319px] sm:px-8 sm:py-10 lg:max-w-[962px]`}
           >
-            <div className={`${flowGrid} flex-1 content-start`}>
-              {flowSteps.flatMap((step, i) => {
-                const stepCell = (
-                  <div
-                    key={step.lines.join(" ")}
-                    className="flex flex-col items-center"
-                  >
-                    <Image
-                      src={step.image}
-                      alt={step.lines.join(" ")}
-                      width={98}
-                      height={98}
-                      className="h-[98px] w-[98px] shrink-0"
-                    />
-                    <p className="mt-3 text-center text-base font-medium leading-snug text-white">
-                      {step.lines[0]}
-                      <br />
-                      {step.lines[1]}
-                    </p>
-                  </div>
-                );
-
-                if (i < flowSteps.length - 1) {
-                  return [stepCell, <FlowArrow key={`arrow-${i}`} />];
-                }
-
-                return [stepCell];
-              })}
-            </div>
-
-            <FlowConnector />
+            <FlowMobile />
+            <FlowDesktop />
           </div>
         </div>
       </div>

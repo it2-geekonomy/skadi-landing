@@ -101,13 +101,13 @@ export default function Features() {
   return (
     <section id="features" className="section-pad">
       <div className="container-main">
-        <div className="mb-[60px] flex flex-col items-end justify-between gap-8 lg:flex-row">
-          <div>
+        <div className="mb-12 flex flex-col items-start justify-between gap-8 sm:mb-[60px] lg:flex-row lg:items-end">
+          <div className="w-full lg:max-w-[403px]">
             <div className="badge">
               <span className="badge-dot" />
               Full Platform
             </div>
-            <h2 className="mt-5 max-w-[403px] text-[32px] font-normal leading-tight tracking-[-1px] sm:text-[42px]">
+            <h2 className="mt-5 text-[28px] font-normal leading-[1.2] tracking-[-0.5px] sm:text-[36px] sm:leading-tight sm:tracking-[-1px] lg:text-[42px]">
               Everything you need.
               <br />
               <span className="serif-italic gradient-serif">
@@ -115,7 +115,7 @@ export default function Features() {
               </span>
             </h2>
           </div>
-          <div className="max-w-[550px]">
+          <div className="w-full max-w-[550px] lg:w-auto">
             <p className="text-base font-light leading-relaxed text-skadi-faint">
               Built for field service businesses in TX and FL. Every feature is
               designed to keep your pipeline full while your team focuses on the
