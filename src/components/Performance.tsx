@@ -33,93 +33,85 @@ function MetricCell({
   value,
   label,
   className = "",
-  compact = false,
 }: {
   value: string;
   label: string;
   className?: string;
-  compact?: boolean;
 }) {
   return (
-    <div className={compact ? `min-w-0 ${className}` : className}>
-      <p
-        className={`text-[36px] font-normal leading-none tracking-[-0.5px] text-white sm:text-[40px] lg:text-[46px] xl:text-[50px] ${
-          compact ? "" : "whitespace-nowrap"
-        }`}
-      >
+    <div className={`min-w-0 ${className}`}>
+      <p className="text-[36px] font-normal leading-none tracking-[-0.5px] text-white sm:text-[40px] lg:text-[46px] 2xl:text-[50px]">
         {value}
       </p>
-      <p
-        className={`mt-3 leading-snug text-skadi-muted lg:mt-4 ${
-          compact ? "text-[13px] sm:text-[14px]" : "text-[14px]"
-        }`}
-      >
+      <p className="mt-3 text-[14px] leading-snug text-skadi-muted lg:mt-4">
         {label}
       </p>
     </div>
   );
 }
 
-function MetricsRowFlex() {
+function MetricsMobileGrid() {
   return (
-    <>
-      <div className="grid grid-cols-2 gap-x-6 gap-y-12 sm:hidden">
-        {metrics.map((m) => (
-          <MetricCell key={m.label} value={m.value} label={m.label} />
-        ))}
-      </div>
-
-      <div className="hidden w-full items-stretch sm:flex">
-        {metrics.flatMap((m, i) => {
-          const widthClass =
-            i === 2 ? "flex-[1.35]" : i === 3 ? "flex-[0.85]" : "flex-1";
-
-          const cell = (
-            <MetricCell
-              key={m.label}
-              value={m.value}
-              label={m.label}
-              className={`${widthClass} min-w-0 xl:min-w-[140px] ${
-                i === 0
-                  ? "pr-3 lg:pr-5"
-                  : i === metrics.length - 1
-                    ? "pl-3 lg:pl-5"
-                    : "px-3 lg:px-5"
-              }`}
-            />
-          );
-
-          if (i < metrics.length - 1) {
-            return [
-              cell,
-              <div
-                key={`divider-${m.label}`}
-                className="mx-3 w-px shrink-0 self-stretch bg-white/[0.1] lg:mx-4 xl:mx-5"
-                aria-hidden="true"
-              />,
-            ];
-          }
-
-          return [cell];
-        })}
-      </div>
-    </>
+    <div className="grid grid-cols-2 gap-x-6 gap-y-12">
+      {metrics.map((m) => (
+        <MetricCell key={m.label} value={m.value} label={m.label} />
+      ))}
+    </div>
   );
 }
 
-function MetricsRowLaptop() {
+function MetricsFlexRow() {
   return (
-    <div className="hidden w-full items-stretch lg:grid lg:grid-cols-4 lg:gap-x-6 xl:hidden">
+    <div className="flex w-full items-stretch">
+      {metrics.flatMap((m, i) => {
+        const widthClass =
+          i === 2 ? "flex-[1.35]" : i === 3 ? "flex-[0.85]" : "flex-1";
+
+        const cell = (
+          <MetricCell
+            key={m.label}
+            value={m.value}
+            label={m.label}
+            className={`${widthClass} ${
+              i === 0
+                ? "pr-3 2xl:pr-5"
+                : i === metrics.length - 1
+                  ? "pl-3 2xl:pl-5"
+                  : "px-3 2xl:px-5"
+            }`}
+          />
+        );
+
+        if (i < metrics.length - 1) {
+          return [
+            cell,
+            <div
+              key={`divider-${m.label}`}
+              className="mx-2 w-px shrink-0 self-stretch bg-white/[0.1] 2xl:mx-5"
+              aria-hidden="true"
+            />,
+          ];
+        }
+
+        return [cell];
+      })}
+    </div>
+  );
+}
+
+function MetricsWideGrid() {
+  return (
+    <div className="grid grid-cols-4 gap-x-6 lg:gap-x-8">
       {metrics.map((m, i) => (
         <div
           key={m.label}
           className={`relative min-w-0 ${
             i > 0
-              ? "before:absolute before:-left-3 before:top-0 before:h-full before:w-px before:bg-white/[0.1]"
+              ? "before:absolute before:-left-3 before:top-0 before:h-full before:w-px before:bg-white/[0.1] lg:before:-left-4"
               : ""
           }`}
         >
-          <MetricCell value={m.value} label={m.label} compact />
+          <MetricCell value={m.value} label={m.label} />
         </div>
       ))}
     </div>
@@ -172,7 +164,7 @@ export default function Performance() {
                   <span className="badge-dot" />
                   Live Performance
                 </div>
-                <h2 className="mt-5 text-[30px] font-normal leading-[1.15] tracking-[-1px] sm:text-[38px] lg:text-[42px] xl:whitespace-nowrap">
+                <h2 className="mt-5 text-[30px] font-normal leading-[1.15] tracking-[-1px] sm:text-[38px] lg:text-[42px] 2xl:whitespace-nowrap">
                   Real numbers from businesses{" "}
                   <span className="serif-italic gradient-serif">like yours.</span>
                 </h2>
@@ -181,14 +173,22 @@ export default function Performance() {
                 </p>
               </div>
 
-              {/* Mobile, tablet & desktop — metrics inside left column */}
-              <div className="mt-auto w-full pt-14 lg:hidden xl:block xl:pt-20">
-                <MetricsRowFlex />
+              {/* Mobile & tablet — metrics under copy */}
+              <div className="mt-auto w-full pt-14 sm:hidden">
+                <MetricsMobileGrid />
+              </div>
+              <div className="mt-auto hidden w-full pt-14 sm:block lg:hidden">
+                <MetricsFlexRow />
+              </div>
+
+              {/* Wide desktop — metrics inside left column */}
+              <div className="mt-auto hidden w-full pt-20 2xl:block">
+                <MetricsFlexRow />
               </div>
             </div>
 
             {/* Right — ~35% */}
-            <div className="relative mt-12 flex flex-[1] flex-col justify-center gap-10 lg:mt-0 lg:pl-12">
+            <div className="relative mt-12 flex min-w-0 flex-[1] flex-col justify-center gap-10 lg:mt-0 lg:pl-12">
               <div
                 className="pointer-events-none absolute bottom-8 left-0 top-8 hidden w-px bg-white/[0.12] lg:block"
                 aria-hidden="true"
@@ -209,9 +209,9 @@ export default function Performance() {
             </div>
           </div>
 
-          {/* Laptop only — full-width metrics row */}
-          <div className="relative z-[1] hidden w-full pt-16 lg:block xl:hidden">
-            <MetricsRowLaptop />
+          {/* Laptop & medium desktop — full-width metrics (lg–2xl) */}
+          <div className="relative z-[1] hidden w-full pt-16 lg:block 2xl:hidden">
+            <MetricsWideGrid />
           </div>
         </div>
       </div>

@@ -58,7 +58,8 @@ const glassCard =
   "rounded-3xl border border-[#6e964f]/30 bg-[rgba(8,14,7,0.55)] shadow-[0_12px_48px_rgba(0,0,0,0.45),0_0_24px_rgba(110,150,79,0.1)] backdrop-blur-md";
 
 const flowGrid =
-  "grid grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)_auto_minmax(0,1fr)_auto_minmax(0,1fr)] gap-x-1";
+  "grid w-full grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)_auto_minmax(0,1fr)_auto_minmax(0,1fr)] gap-x-1";
+
 function SectionGlow() {
   return (
     <div
@@ -90,7 +91,9 @@ function StatCard({
   icon,
 }: (typeof stats)[0]) {
   return (
-    <div className={`${glassCard} flex h-[319px] w-[221px] shrink-0 flex-col p-[22px_18px] lg:h-full lg:min-h-[319px]`}>
+    <div
+      className={`${glassCard} flex w-full max-w-[340px] min-h-[280px] flex-col p-[22px_18px] sm:h-[319px] sm:w-[221px] sm:max-w-none sm:shrink-0 2xl:h-full 2xl:min-h-[319px]`}
+    >
       <div className="mb-7 flex h-12 w-12 items-center justify-center rounded-3xl border border-[#6e964f]/20 bg-[rgba(37,77,44,0.35)] shadow-[0_0_16px_rgba(110,150,79,0.12)]">
         <svg
           viewBox="0 0 24 24"
@@ -114,26 +117,40 @@ function StatCard({
 function FlowStepCell({
   lines,
   image,
-  compact = false,
+  variant = "wide",
 }: {
   lines: string[];
   image: string;
-  compact?: boolean;
+  variant?: "mobile" | "wide" | "inline";
 }) {
-  const iconSize = compact ? 64 : 98;
+  const imageClass =
+    variant === "mobile"
+      ? "h-16 w-16"
+      : variant === "inline"
+        ? "h-[72px] w-[72px] min-[1650px]:h-[98px] min-[1650px]:w-[98px]"
+        : "h-20 w-20 sm:h-[88px] sm:w-[88px] lg:h-[98px] lg:w-[98px]";
+
+  const textClass =
+    variant === "mobile"
+      ? "mt-2 text-[13px]"
+      : variant === "inline"
+        ? "mt-2 text-sm min-[1650px]:mt-3 min-[1650px]:text-base"
+        : "mt-3 text-sm sm:text-base";
+
+  const imageSize =
+    variant === "mobile" ? 64 : variant === "inline" ? 98 : 98;
+
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex min-w-0 flex-col items-center">
       <Image
         src={image}
         alt={lines.join(" ")}
-        width={iconSize}
-        height={iconSize}
-        className={`shrink-0 ${compact ? "h-16 w-16" : "h-[98px] w-[98px]"}`}
+        width={imageSize}
+        height={imageSize}
+        className={`shrink-0 ${imageClass}`}
       />
       <p
-        className={`mt-2 text-center font-medium leading-snug text-white ${
-          compact ? "text-[13px]" : "mt-3 text-base"
-        }`}
+        className={`text-center font-medium leading-snug text-white ${textClass}`}
       >
         {lines[0]}
         <br />
@@ -145,20 +162,22 @@ function FlowStepCell({
 
 function FlowArrow({
   vertical = false,
-  compact = false,
+  variant = "wide",
 }: {
   vertical?: boolean;
-  compact?: boolean;
+  variant?: "mobile" | "wide" | "inline";
 }) {
+  const arrowClass = vertical
+    ? "py-1 text-sm"
+    : variant === "mobile"
+      ? "self-center pt-6 text-sm"
+      : variant === "inline"
+        ? "mt-8 w-[1.125rem] text-sm min-[1650px]:mt-[42px] min-[1650px]:text-base"
+        : "mt-8 w-[1.125rem] text-base sm:mt-10 lg:mt-[42px]";
+
   return (
     <span
-      className={`shrink-0 text-center text-white/35 ${
-        vertical
-          ? "py-1 text-sm"
-          : compact
-            ? "self-center pt-6 text-sm"
-            : "mt-[42px] w-[1.125rem] text-base"
-      }`}
+      className={`shrink-0 text-center text-white/35 ${arrowClass}`}
       aria-hidden="true"
     >
       {vertical ? "↓" : "→"}
@@ -170,23 +189,23 @@ function FlowMobile() {
   return (
     <div className="flex flex-col gap-4 sm:hidden">
       <div className="grid grid-cols-[1fr_auto_1fr] items-start gap-x-2">
-        <FlowStepCell {...flowSteps[0]} compact />
-        <FlowArrow compact />
-        <FlowStepCell {...flowSteps[1]} compact />
+        <FlowStepCell {...flowSteps[0]} variant="mobile" />
+        <FlowArrow variant="mobile" />
+        <FlowStepCell {...flowSteps[1]} variant="mobile" />
       </div>
       <div className="flex justify-center">
         <FlowArrow vertical />
       </div>
       <div className="grid grid-cols-[1fr_auto_1fr] items-start gap-x-2">
-        <FlowStepCell {...flowSteps[2]} compact />
-        <FlowArrow compact />
-        <FlowStepCell {...flowSteps[3]} compact />
+        <FlowStepCell {...flowSteps[2]} variant="mobile" />
+        <FlowArrow variant="mobile" />
+        <FlowStepCell {...flowSteps[3]} variant="mobile" />
       </div>
     </div>
   );
 }
 
-function FlowDesktop() {
+function FlowDesktop({ variant = "wide" }: { variant?: "wide" | "inline" }) {
   return (
     <>
       <div className={`${flowGrid} hidden content-start sm:grid`}>
@@ -196,11 +215,15 @@ function FlowDesktop() {
               key={step.lines.join(" ")}
               lines={step.lines}
               image={step.image}
+              variant={variant}
             />
           );
 
           if (i < flowSteps.length - 1) {
-            return [stepCell, <FlowArrow key={`arrow-${i}`} />];
+            return [
+              stepCell,
+              <FlowArrow key={`arrow-${i}`} variant={variant} />,
+            ];
           }
 
           return [stepCell];
@@ -306,18 +329,28 @@ export default function MissedCalls() {
           </p>
         </div>
 
-        <div className="relative z-[2] flex w-full flex-col items-center gap-6 lg:flex-row lg:items-stretch lg:justify-center lg:gap-[18px]">
-          <div className="flex flex-col items-center gap-[18px] sm:flex-row sm:flex-wrap sm:justify-center lg:shrink-0 lg:flex-nowrap lg:items-stretch lg:self-stretch">
+        {/* Stacked: mobile → medium desktop. Side-by-side only at 2xl+ */}
+        <div className="relative z-[2] flex w-full flex-col items-center gap-6 2xl:flex-row 2xl:items-stretch 2xl:justify-center 2xl:gap-[18px]">
+          <div className="flex w-full max-w-[720px] flex-col items-center gap-[18px] sm:max-w-none sm:flex-row sm:flex-wrap sm:justify-center 2xl:w-auto 2xl:max-w-none 2xl:shrink-0 2xl:flex-nowrap 2xl:items-stretch 2xl:self-stretch">
             {stats.map((s) => (
               <StatCard key={s.label} {...s} />
             ))}
           </div>
 
           <div
-            className={`${glassCard} flex w-full min-w-0 flex-col justify-center px-5 py-8 sm:px-8 sm:py-10 lg:min-h-[319px] lg:min-w-0 lg:flex-1 lg:max-w-[962px]`}
+            className={`${glassCard} flex w-full min-w-0 flex-col justify-center px-5 py-8 sm:px-8 sm:py-10 2xl:min-h-[319px] 2xl:flex-1 2xl:max-w-[962px]`}
           >
             <FlowMobile />
-            <FlowDesktop />
+
+            {/* Full-width flow when stats + flow are stacked */}
+            <div className="hidden sm:block 2xl:hidden">
+              <FlowDesktop variant="wide" />
+            </div>
+
+            {/* Inline flow when side-by-side on large desktop */}
+            <div className="hidden 2xl:block">
+              <FlowDesktop variant="inline" />
+            </div>
           </div>
         </div>
       </div>
