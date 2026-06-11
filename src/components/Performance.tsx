@@ -33,26 +33,36 @@ function MetricCell({
   value,
   label,
   className = "",
+  compact = false,
 }: {
   value: string;
   label: string;
   className?: string;
+  compact?: boolean;
 }) {
   return (
-    <div className={className}>
-      <p className="whitespace-nowrap text-[36px] font-normal leading-none tracking-[-0.5px] text-white sm:text-[40px] lg:text-[46px] xl:text-[50px]">
+    <div className={compact ? `min-w-0 ${className}` : className}>
+      <p
+        className={`text-[36px] font-normal leading-none tracking-[-0.5px] text-white sm:text-[40px] lg:text-[46px] xl:text-[50px] ${
+          compact ? "" : "whitespace-nowrap"
+        }`}
+      >
         {value}
       </p>
-      <p className="mt-3 text-[14px] leading-snug text-skadi-muted lg:mt-4">
+      <p
+        className={`mt-3 leading-snug text-skadi-muted lg:mt-4 ${
+          compact ? "text-[13px] sm:text-[14px]" : "text-[14px]"
+        }`}
+      >
         {label}
       </p>
     </div>
   );
 }
 
-function MetricsRow() {
+function MetricsRowFlex() {
   return (
-    <div className="mt-auto w-full pt-14 lg:pt-20">
+    <>
       <div className="grid grid-cols-2 gap-x-6 gap-y-12 sm:hidden">
         {metrics.map((m) => (
           <MetricCell key={m.label} value={m.value} label={m.label} />
@@ -69,7 +79,7 @@ function MetricsRow() {
               key={m.label}
               value={m.value}
               label={m.label}
-              className={`${widthClass} min-w-[140px] ${
+              className={`${widthClass} min-w-0 xl:min-w-[140px] ${
                 i === 0
                   ? "pr-3 lg:pr-5"
                   : i === metrics.length - 1
@@ -93,6 +103,25 @@ function MetricsRow() {
           return [cell];
         })}
       </div>
+    </>
+  );
+}
+
+function MetricsRowLaptop() {
+  return (
+    <div className="hidden w-full items-stretch lg:grid lg:grid-cols-4 lg:gap-x-6 xl:hidden">
+      {metrics.map((m, i) => (
+        <div
+          key={m.label}
+          className={`relative min-w-0 ${
+            i > 0
+              ? "before:absolute before:-left-3 before:top-0 before:h-full before:w-px before:bg-white/[0.1]"
+              : ""
+          }`}
+        >
+          <MetricCell value={m.value} label={m.label} compact />
+        </div>
+      ))}
     </div>
   );
 }
@@ -143,7 +172,7 @@ export default function Performance() {
                   <span className="badge-dot" />
                   Live Performance
                 </div>
-                <h2 className="mt-5 text-[30px] font-normal leading-[1.15] tracking-[-1px] sm:text-[38px] lg:whitespace-nowrap lg:text-[42px]">
+                <h2 className="mt-5 text-[30px] font-normal leading-[1.15] tracking-[-1px] sm:text-[38px] lg:text-[42px] xl:whitespace-nowrap">
                   Real numbers from businesses{" "}
                   <span className="serif-italic gradient-serif">like yours.</span>
                 </h2>
@@ -152,7 +181,10 @@ export default function Performance() {
                 </p>
               </div>
 
-              <MetricsRow />
+              {/* Mobile, tablet & desktop — metrics inside left column */}
+              <div className="mt-auto w-full pt-14 lg:hidden xl:block xl:pt-20">
+                <MetricsRowFlex />
+              </div>
             </div>
 
             {/* Right — ~35% */}
@@ -175,6 +207,11 @@ export default function Performance() {
                 </div>
               ))}
             </div>
+          </div>
+
+          {/* Laptop only — full-width metrics row */}
+          <div className="relative z-[1] hidden w-full pt-16 lg:block xl:hidden">
+            <MetricsRowLaptop />
           </div>
         </div>
       </div>
