@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const stats = [
   {
     num: "62%",
@@ -36,44 +38,50 @@ const stats = [
 const flowSteps = [
   {
     lines: ["Incoming", "Customer Call"],
-    red: true,
-    icon: (
-      <path d="M22 16.9v3a2 2 0 01-2.18 2 19.8 19.8 0 01-8.63-3.07A19.5 19.5 0 013.87 11a19.8 19.8 0 01-3.07-8.67A2 2 0 012.78 0h3a2 2 0 012 1.72c.12.96.36 1.9.71 2.81a2 2 0 01-.45 2.11L6.91 7.77A16 16 0 0014.23 15l1.13-1.13a2 2 0 012.11-.45c.91.35 1.85.59 2.81.71A2 2 0 0122 16.9z" />
-    ),
+    image: "/images/incomingcall.png",
   },
   {
     lines: ["Goes to", "Voicemail"],
-    red: true,
-    icon: (
-      <>
-        <rect x="2" y="4" width="20" height="14" rx="1" />
-        <path d="M8 21h8M12 17v4" />
-      </>
-    ),
+    image: "/images/voicemail.png",
   },
   {
     lines: ["Lost", "Leads"],
-    red: true,
-    icon: (
-      <>
-        <path d="M16 8v8M8 8v8" />
-        <path d="M3 12h3M18 12h3" />
-        <line x1="2" y1="2" x2="22" y2="22" />
-      </>
-    ),
+    image: "/images/lostleades.png",
   },
   {
     lines: ["Competitor", "Wins"],
-    red: false,
-    icon: (
-      <>
-        <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
-        <circle cx="9" cy="7" r="4" />
-        <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
-      </>
-    ),
+    image: "/images/Competitor.png",
   },
 ];
+
+const glassCard =
+  "rounded-3xl border border-[#6e964f]/30 bg-[rgba(8,14,7,0.55)] shadow-[0_12px_48px_rgba(0,0,0,0.45),0_0_24px_rgba(110,150,79,0.1)] backdrop-blur-md";
+
+const flowGrid =
+  "grid grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)_auto_minmax(0,1fr)_auto_minmax(0,1fr)] gap-x-1";
+function SectionGlow() {
+  return (
+    <div
+      className="pointer-events-none absolute inset-0 z-0 overflow-hidden"
+      aria-hidden="true"
+    >
+      <div
+        className="absolute left-1/2 top-[38%] h-[min(520px,58vh)] w-[min(1400px,96vw)] -translate-x-1/2 -translate-y-1/2 rounded-full blur-[120px]"
+        style={{
+          background:
+            "radial-gradient(ellipse 125% 50% at 50% 50%, rgba(110,150,79,0.38) 0%, rgba(46,97,7,0.16) 40%, transparent 72%)",
+        }}
+      />
+      <div
+        className="absolute left-1/2 top-[42%] h-[min(380px,45vh)] w-[min(1000px,80vw)] -translate-x-1/2 -translate-y-1/2 rounded-full blur-[90px]"
+        style={{
+          background:
+            "radial-gradient(ellipse 110% 45% at 50% 50%, rgba(110,150,79,0.28) 0%, rgba(46,97,7,0.1) 48%, transparent 78%)",
+        }}
+      />
+    </div>
+  );
+}
 
 function StatCard({
   num,
@@ -82,8 +90,8 @@ function StatCard({
   icon,
 }: (typeof stats)[0]) {
   return (
-    <div className="card-gradient h-[319px] w-[221px] shrink-0 rounded-3xl p-[22px_18px]">
-      <div className="mb-7 flex h-12 w-12 items-center justify-center rounded-3xl bg-[rgba(37,77,44,0.45)]">
+    <div className={`${glassCard} h-[319px] w-[221px] shrink-0 p-[22px_18px]`}>
+      <div className="mb-7 flex h-12 w-12 items-center justify-center rounded-3xl border border-[#6e964f]/20 bg-[rgba(37,77,44,0.35)] shadow-[0_0_16px_rgba(110,150,79,0.12)]">
         <svg
           viewBox="0 0 24 24"
           fill="none"
@@ -103,9 +111,6 @@ function StatCard({
   );
 }
 
-const flowGrid =
-  "grid grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)_auto_minmax(0,1fr)_auto_minmax(0,1fr)] gap-x-1";
-
 function FlowArrow() {
   return (
     <span
@@ -118,7 +123,6 @@ function FlowArrow() {
 }
 
 function FlowConnector() {
-  // Match flowGrid: [1fr auto 1fr auto 1fr auto 1fr] — auto ≈ 2.1% of width
   const arrow = 2.1;
   const col = (100 - 3 * arrow) / 4;
   const xs = [
@@ -127,60 +131,75 @@ function FlowConnector() {
     col * 2.5 + arrow * 2,
     col * 3.5 + arrow * 3,
   ];
-  const [x1, x2, x3, x4] = xs;
 
-  const yDot = 6;
-  const yRail = 20;
-  const cr = 4.5;
+  const yStart = 10;
+  const yRail = 34;
+  const cr = 5;
 
   const pathD = [
-    `M ${x1} ${yDot}`,
+    `M ${xs[0]} ${yStart}`,
     `V ${yRail - cr}`,
-    `Q ${x1} ${yRail} ${x1 + cr} ${yRail}`,
-    `H ${x2 - cr}`,
-    `Q ${x2} ${yRail} ${x2} ${yRail - cr}`,
-    `V ${yDot}`,
+    `Q ${xs[0]} ${yRail} ${xs[0] + cr} ${yRail}`,
+    `H ${xs[1] - cr}`,
+    `Q ${xs[1]} ${yRail} ${xs[1]} ${yRail - cr}`,
+    `V ${yStart}`,
+
+    `M ${xs[1]} ${yStart}`,
     `V ${yRail - cr}`,
-    `Q ${x2} ${yRail} ${x2 + cr} ${yRail}`,
-    `H ${x3 - cr}`,
-    `Q ${x3} ${yRail} ${x3} ${yRail - cr}`,
-    `V ${yDot}`,
+    `Q ${xs[1]} ${yRail} ${xs[1] + cr} ${yRail}`,
+    `H ${xs[2] - cr}`,
+    `Q ${xs[2]} ${yRail} ${xs[2]} ${yRail - cr}`,
+    `V ${yStart}`,
+
+    `M ${xs[2]} ${yStart}`,
     `V ${yRail - cr}`,
-    `Q ${x3} ${yRail} ${x3 + cr} ${yRail}`,
-    `H ${x4 - cr}`,
-    `Q ${x4} ${yRail} ${x4} ${yRail - cr}`,
-    `V ${yDot}`,
+    `Q ${xs[2]} ${yRail} ${xs[2] + cr} ${yRail}`,
+    `H ${xs[3] - cr}`,
+    `Q ${xs[3]} ${yRail} ${xs[3]} ${yRail - cr}`,
+    `V ${yStart}`,
   ].join(" ");
 
   return (
-    <svg
-      className="mt-6 w-full"
-      viewBox="0 0 100 24"
-      height={24}
-      preserveAspectRatio="none"
-      aria-hidden="true"
-    >
+    <div className="relative mt-2 h-10 w-full" aria-hidden="true">
       {xs.map((x) => (
-        <circle key={x} cx={x} cy={4} r={2} fill="#ff2525" />
+        <span
+          key={x}
+          className="absolute top-0 -translate-x-1/2"
+          style={{ left: `${x}%` }}
+        >
+          <span className="absolute left-1/2 top-1/2 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#ff3b3b]/25 blur-[1px]" />
+          <span className="relative block h-[5px] w-[10px] rounded-full bg-[#ff3b3b] shadow-[0_0_6px_rgba(255,59,59,0.55)]" />
+        </span>
       ))}
-      <path
-        d={pathD}
-        fill="none"
-        stroke="#f34543"
-        strokeWidth={1.5}
-        strokeDasharray="3 3"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        vectorEffect="non-scaling-stroke"
-      />
-    </svg>
+      <svg
+        className="absolute inset-0 h-full w-full"
+        viewBox="0 0 100 40"
+        preserveAspectRatio="none"
+      >
+        <path
+          d={pathD}
+          fill="none"
+          stroke="#f34543"
+          strokeWidth={1.5}
+          strokeDasharray="4 3"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          vectorEffect="non-scaling-stroke"
+        />
+      </svg>
+    </div>
   );
 }
 
 export default function MissedCalls() {
   return (
-    <section id="missed" className="bg-black section-pad">
-      <div className="container-main">
+    <section
+      id="missed"
+      className="relative overflow-x-hidden bg-black section-pad"
+    >
+      <SectionGlow />
+
+      <div className="container-main relative z-[3]">
         <div className="mb-14 text-center lg:mb-16">
           <div className="badge border border-white/[0.06]">
             <span className="badge-dot" />
@@ -196,15 +215,16 @@ export default function MissedCalls() {
           </p>
         </div>
 
-        {/* 3 stat cards + 1 wide flow card — single row on desktop */}
-        <div className="flex flex-col items-center gap-[18px] lg:flex-row lg:items-stretch lg:justify-center">
+        <div className="relative z-[2] flex flex-col items-center gap-[18px] lg:flex-row lg:items-stretch lg:justify-center">
           <div className="flex flex-col gap-[18px] sm:flex-row">
             {stats.map((s) => (
               <StatCard key={s.label} {...s} />
             ))}
           </div>
 
-          <div className="card-gradient flex h-[319px] w-full min-w-0 flex-1 flex-col rounded-3xl px-8 py-10 lg:max-w-[962px]">
+          <div
+            className={`${glassCard} flex h-[319px] w-full min-w-0 flex-1 flex-col px-8 py-10 lg:max-w-[962px]`}
+          >
             <div className={`${flowGrid} flex-1 content-start`}>
               {flowSteps.flatMap((step, i) => {
                 const stepCell = (
@@ -212,23 +232,13 @@ export default function MissedCalls() {
                     key={step.lines.join(" ")}
                     className="flex flex-col items-center"
                   >
-                    <div
-                      className={`flex h-[98px] w-[98px] items-center justify-center rounded-full ${
-                        step.red
-                          ? "border-[1.5px] border-[#f34543] bg-[#2a1210]"
-                          : "border-[1.5px] border-[#1e3722] bg-[#0b1405]"
-                      }`}
-                    >
-                      <svg
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke={step.red ? "#f34543" : "#6e964f"}
-                        strokeWidth="1.5"
-                        className="h-9 w-9"
-                      >
-                        {step.icon}
-                      </svg>
-                    </div>
+                    <Image
+                      src={step.image}
+                      alt={step.lines.join(" ")}
+                      width={98}
+                      height={98}
+                      className="h-[98px] w-[98px] shrink-0"
+                    />
                     <p className="mt-3 text-center text-base font-medium leading-snug text-white">
                       {step.lines[0]}
                       <br />

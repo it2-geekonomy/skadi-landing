@@ -14,14 +14,14 @@ export default function Home() {
     <main className="min-h-screen bg-skadi-bg">
       <Navbar />
       <Hero />
-      <MissedCalls />
       <Solution />
+      <MissedCalls />
       <HowItWorks />
       <Features />
       <Performance />
       <Testimonials />
       <Contact />
-      <Footer />
+      {/* <Footer /> */}
     </main>
   );
 }

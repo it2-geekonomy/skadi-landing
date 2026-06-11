@@ -55,6 +55,48 @@ const features = [
   },
 ];
 
+function FeatureCard({
+  title,
+  desc,
+  icon,
+}: (typeof features)[0]) {
+  return (
+    <div className="relative">
+      <div className="pointer-events-none absolute left-6 top-0 z-10 -translate-y-1/2">
+        <div className="relative flex h-11 w-11 items-center justify-center">
+          <div
+            className="absolute h-14 w-14 rounded-full"
+            style={{
+              background:
+                "radial-gradient(circle, rgba(110,150,79,0.28) 0%, transparent 72%)",
+            }}
+          />
+          <div className="relative flex h-[42px] w-[42px] items-center justify-center rounded-full border border-[#6e964f]/35 bg-[#080e07]">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#91F045"
+              strokeWidth="1.5"
+              className="h-5 w-5"
+            >
+              {icon}
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <div className="flex h-[186px] flex-col rounded-2xl border border-[#6e964f]/30 bg-[rgba(8,14,7,0.25)] px-6 pb-5 pt-9">
+        <h3 className="mb-2 text-left text-lg font-semibold leading-snug text-white">
+          {title}
+        </h3>
+        <p className="text-left text-[15px] leading-relaxed text-skadi-muted">
+          {desc}
+        </p>
+      </div>
+    </div>
+  );
+}
+
 export default function Features() {
   return (
     <section id="features" className="section-pad">
@@ -97,44 +139,9 @@ export default function Features() {
           </div>
         </div>
 
-        <div className="grid gap-[34px] sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-7">
           {features.map((f) => (
-            <div
-              key={f.title}
-              className="relative overflow-hidden rounded-[18px] px-7 pb-7 pt-[55px]"
-            >
-              <div
-                className="pointer-events-none absolute inset-0 rounded-[18px]"
-                style={{
-                  background:
-                    "linear-gradient(153deg, rgba(32,43,31,0.6) 0%, rgba(2,5,6,0.8) 100%)",
-                  border: "1px solid rgba(55,105,60,0.5)",
-                }}
-              />
-              <div
-                className="relative z-[1] mb-[22px] flex h-14 w-14 items-center justify-center rounded-full"
-                style={{
-                  background:
-                    "linear-gradient(180deg, rgba(145,240,69,0.31) 0%, rgba(35,48,25,0.31) 100%)",
-                }}
-              >
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="#91F045"
-                  strokeWidth="1.5"
-                  className="h-7 w-7"
-                >
-                  {f.icon}
-                </svg>
-              </div>
-              <h3 className="relative z-[1] mb-2.5 text-xl font-semibold">
-                {f.title}
-              </h3>
-              <p className="relative z-[1] text-base leading-relaxed text-skadi-muted">
-                {f.desc}
-              </p>
-            </div>
+            <FeatureCard key={f.title} {...f} />
           ))}
         </div>
       </div>

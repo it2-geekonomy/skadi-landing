@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const metrics = [
   { value: "333+", label: "Calls handled / month" },
   { value: "1.4s", label: "Avg answer latency" },
@@ -14,16 +16,84 @@ const highlights = [
 const highlightDesc =
   "Positive, neutral, or negative — understand how every caller feels, and act on it before it becomes a review.";
 
-function DiamondIcon() {
+function HighlightIcon() {
   return (
-    <svg
-      viewBox="0 0 10 10"
-      fill="none"
-      className="mt-1 h-2.5 w-2.5 shrink-0"
-      aria-hidden="true"
-    >
-      <path d="M5 0L9.5 5L5 10L0.5 5L5 0Z" fill="white" />
-    </svg>
+    <Image
+      src="/images/Vector.svg"
+      alt=""
+      width={11}
+      height={11}
+      className="mt-0.5 h-[11px] w-[11px] shrink-0"
+      aria-hidden
+    />
+  );
+}
+
+function MetricCell({
+  value,
+  label,
+  className = "",
+}: {
+  value: string;
+  label: string;
+  className?: string;
+}) {
+  return (
+    <div className={className}>
+      <p className="whitespace-nowrap text-[36px] font-normal leading-none tracking-[-0.5px] text-white sm:text-[40px] lg:text-[46px] xl:text-[50px]">
+        {value}
+      </p>
+      <p className="mt-3 text-[14px] leading-snug text-skadi-muted lg:mt-4">
+        {label}
+      </p>
+    </div>
+  );
+}
+
+function MetricsRow() {
+  return (
+    <div className="mt-auto w-full pt-14 lg:pt-20">
+      <div className="grid grid-cols-2 gap-x-6 gap-y-12 sm:hidden">
+        {metrics.map((m) => (
+          <MetricCell key={m.label} value={m.value} label={m.label} />
+        ))}
+      </div>
+
+      <div className="hidden w-full items-stretch sm:flex">
+        {metrics.flatMap((m, i) => {
+          const widthClass =
+            i === 2 ? "flex-[1.35]" : i === 3 ? "flex-[0.85]" : "flex-1";
+
+          const cell = (
+            <MetricCell
+              key={m.label}
+              value={m.value}
+              label={m.label}
+              className={`${widthClass} min-w-[140px] ${
+                i === 0
+                  ? "pr-3 lg:pr-5"
+                  : i === metrics.length - 1
+                    ? "pl-3 lg:pl-5"
+                    : "px-3 lg:px-5"
+              }`}
+            />
+          );
+
+          if (i < metrics.length - 1) {
+            return [
+              cell,
+              <div
+                key={`divider-${m.label}`}
+                className="mx-3 w-px shrink-0 self-stretch bg-white/[0.1] lg:mx-4 xl:mx-5"
+                aria-hidden="true"
+              />,
+            ];
+          }
+
+          return [cell];
+        })}
+      </div>
+    </div>
   );
 }
 
@@ -64,7 +134,7 @@ export default function Performance() {
 
           <div className="relative z-[1] flex flex-col lg:min-h-[420px] lg:flex-row">
             {/* Left — ~65% */}
-            <div className="flex flex-[1.7] flex-col lg:pr-12">
+            <div className="flex min-w-0 flex-[1.7] flex-col lg:pr-12">
               <div>
                 <div
                   className="badge border border-white/[0.06]"
@@ -73,38 +143,16 @@ export default function Performance() {
                   <span className="badge-dot" />
                   Live Performance
                 </div>
-                <h2 className="mt-5 max-w-[560px] text-[30px] font-normal leading-[1.15] tracking-[-1px] sm:text-[38px] lg:text-[42px]">
+                <h2 className="mt-5 text-[30px] font-normal leading-[1.15] tracking-[-1px] sm:text-[38px] lg:whitespace-nowrap lg:text-[42px]">
                   Real numbers from businesses{" "}
-                  <span className="serif-italic gradient-serif">
-                    like yours.
-                  </span>
+                  <span className="serif-italic gradient-serif">like yours.</span>
                 </h2>
                 <p className="mt-5 max-w-[498px] text-[15px] leading-relaxed text-skadi-muted">
                   {highlightDesc}
                 </p>
               </div>
 
-              <div className="mt-auto pt-14 lg:pt-20">
-                <div className="grid grid-cols-2 sm:grid-cols-4">
-                  {metrics.map((m, i) => (
-                    <div
-                      key={m.label}
-                      className={`py-1 ${
-                        i < metrics.length - 1
-                          ? "sm:border-r sm:border-white/[0.12]"
-                          : ""
-                      } ${i === 0 ? "sm:pr-8" : "sm:px-8"}`}
-                    >
-                      <p className="text-[36px] font-normal leading-none text-white sm:text-[54px]">
-                        {m.value}
-                      </p>
-                      <p className="mt-3 text-[15px] leading-snug text-skadi-muted">
-                        {m.label}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              </div>
+              <MetricsRow />
             </div>
 
             {/* Right — ~35% */}
@@ -116,7 +164,7 @@ export default function Performance() {
               {highlights.map((title, i) => (
                 <div key={i}>
                   <div className="flex items-start gap-2.5">
-                    <DiamondIcon />
+                    <HighlightIcon />
                     <p className="text-[15px] font-normal leading-snug text-white">
                       {title}
                     </p>

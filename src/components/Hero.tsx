@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-
+import SectionAurora from "@/components/SectionAurora";
 /* fixed positions — deterministic for SSR */
 const tinyStars = Array.from({ length: 72 }, (_, i) => ({
   top: `${((i * 17 + 11) % 94) + 2}%`,
@@ -77,9 +77,12 @@ function TwinkleStar({
   );
 }
 
+function HeroAurora() {
+  return <SectionAurora primaryTop="46%" secondaryTop="52%" />;
+}
 function HeroStars() {
   return (
-    <div className="pointer-events-none absolute inset-0" aria-hidden="true">
+    <div className="pointer-events-none absolute inset-0 z-[1]" aria-hidden="true">
       {tinyStars.map((star, i) => (
         <div
           key={`tiny-${i}`}
@@ -125,24 +128,7 @@ export default function Hero() {
       id="home"
       className="relative overflow-hidden bg-black pb-16 pt-[68px] text-center lg:pb-24"
     >
-      {/* bottom horizon glow */}
-      <div
-        className="pointer-events-none absolute inset-x-0 bottom-0 h-[60%]"
-        style={{
-          background:
-            "radial-gradient(ellipse 100% 80% at 50% 100%, rgba(46,97,7,0.4) 0%, rgba(46,97,7,0.1) 45%, transparent 80%)",
-        }}
-      />
-
-      {/* soft ambient glow */}
-      <div
-        className="pointer-events-none absolute inset-0"
-        style={{
-          background:
-            "radial-gradient(ellipse 70% 55% at 50% 40%, rgba(46,97,7,0.1) 0%, transparent 65%)",
-        }}
-      />
-
+      <HeroAurora />
       <HeroStars />
 
       <div className="relative z-[2] mx-auto flex min-h-[calc(100vh-68px)] max-w-[820px] flex-col items-center justify-center px-6">
@@ -178,11 +164,7 @@ export default function Hero() {
       </div>
 
       <div className="relative z-[2] mx-auto mt-10 max-w-6xl px-6 lg:mt-16 lg:px-8">
-        <div
-          className="pointer-events-none absolute left-1/2 top-0 h-[263px] w-full max-w-4xl -translate-x-1/2 rounded-full opacity-65"
-          style={{ background: "rgba(110,149,79,0.65)" }}
-        />
-        <div className="relative overflow-hidden rounded-3xl border border-white/10 shadow-2xl shadow-[rgba(110,149,79,0.15)]">
+        <div className="relative overflow-hidden rounded-3xl border border-white/10 shadow-2xl shadow-black/40">
           <Image
             src="/images/v139_627.png"
             alt="Skadi Admin Overview dashboard"

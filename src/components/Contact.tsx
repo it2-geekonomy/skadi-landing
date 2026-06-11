@@ -24,6 +24,39 @@ function TickIcon() {
   );
 }
 
+function ContactGrid() {
+  return (
+    <div
+      className="pointer-events-none absolute left-0 top-0 z-[1] h-[min(300px,42%)] w-[min(300px,36%)]"
+      style={{
+        backgroundImage: `
+          linear-gradient(rgba(110,150,79,0.18) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(110,150,79,0.18) 1px, transparent 1px)
+        `,
+        backgroundSize: "28px 28px",
+        maskImage:
+          "radial-gradient(ellipse 90% 85% at 0% 0%, black 28%, transparent 72%)",
+        WebkitMaskImage:
+          "radial-gradient(ellipse 90% 85% at 0% 0%, black 28%, transparent 72%)",
+      }}
+      aria-hidden="true"
+    />
+  );
+}
+
+function ContactGlow() {
+  return (
+    <div
+      className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-[55%]"
+      style={{
+        background:
+          "radial-gradient(ellipse 70% 80% at 50% 100%, rgba(110,150,79,0.09) 0%, rgba(110,150,79,0.03) 40%, transparent 72%)",
+      }}
+      aria-hidden="true"
+    />
+  );
+}
+
 export default function Contact() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -68,14 +101,11 @@ export default function Contact() {
   return (
     <section id="demo" className="pb-[140px] pt-[100px]">
       <div className="container-main">
-        <div
-          className="flex flex-col gap-[60px] rounded-3xl p-10 lg:flex-row lg:p-20"
-          style={{
-            background:
-              "linear-gradient(135deg, rgba(20,34,18,0.6) 0%, rgba(5,10,4,0.8) 100%)",
-            border: "1px solid rgba(110,150,79,0.2)",
-          }}
-        >
+        <div className="relative overflow-hidden rounded-3xl border border-white/[0.08] bg-black p-10 lg:p-20">
+          <ContactGlow />
+          <ContactGrid />
+
+          <div className="relative z-[2] flex flex-col gap-[60px] lg:flex-row">
           <div className="flex-1">
             <div className="badge">
               <span className="badge-dot" />
@@ -102,7 +132,7 @@ export default function Contact() {
             </ul>
           </div>
 
-          <div className="w-full shrink-0 rounded-[18px] border border-white/10 bg-white/[0.03] p-10 lg:w-[480px]">
+          <div className="w-full shrink-0 rounded-[18px] border border-white/10 bg-[#0a0a0a]/75 p-10 backdrop-blur-sm lg:w-[480px]">
             <h3 className="text-[26px] font-medium">Request Your Demo</h3>
             <p className="mt-2 text-[15px] text-skadi-muted">
               We&apos;ll reach out within one business day to schedule.
@@ -190,6 +220,7 @@ export default function Contact() {
                 </button>
               </form>
             )}
+          </div>
           </div>
         </div>
       </div>

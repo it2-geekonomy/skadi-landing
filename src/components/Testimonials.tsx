@@ -103,16 +103,11 @@ function TestimonialCard({
 }: Testimonial) {
   return (
     <div
-      className="mb-3.5 rounded-xl p-6"
-      style={{
-        background: "rgba(255,255,255,0.025)",
-        border: featured
-          ? "0.5px solid rgba(110,149,79,0.55)"
-          : "0.5px solid rgba(255,255,255,0.08)",
-        boxShadow: featured
-          ? "0 10px 20px rgba(119,126,150,0.1)"
-          : undefined,
-      }}
+      className={`relative mb-3.5 overflow-hidden rounded-xl p-6 ${
+        featured
+          ? "border border-[#6e964f]/55 bg-[#0c120a]"
+          : "border border-white/[0.08] bg-[#080e07]"
+      }`}
     >
       <div className="mb-4 flex items-start justify-between gap-3">
         <div className="flex items-center gap-3">
