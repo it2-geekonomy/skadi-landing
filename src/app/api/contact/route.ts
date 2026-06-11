@@ -7,6 +7,8 @@ type ContactPayload = {
   phone?: string;
 };
 
+const CRM_SOURCE = "Skadi Website Contact Form";
+
 export async function POST(request: Request) {
   const apiUrl = process.env.CRM_API_URL;
   const apiKey = process.env.CRM_API_KEY;
@@ -46,6 +48,9 @@ export async function POST(request: Request) {
     );
   }
 
+  const fullName = `${firstName} ${lastName}`;
+  const client = email.includes("@") ? email.split("@")[1] : "Unknown";
+
   try {
     const crmResponse = await fetch(apiUrl, {
       method: "POST",
@@ -55,16 +60,27 @@ export async function POST(request: Request) {
         "x-organization-id": orgId,
       },
       body: JSON.stringify({
-        name: `${firstName} ${lastName}`,
+        name: fullName,
+        firstName,
+        lastName,
         email,
         phone,
-        source: "Skadi Website Contact Form",
+        client,
+        title: "Demo Request",
+        source: CRM_SOURCE,
       }),
     });
 
     if (!crmResponse.ok) {
       const errorText = await crmResponse.text();
-      console.error("CRM API error:", crmResponse.status, errorText);
+      let errorDetail = errorText;
+      try {
+        const errorJson = JSON.parse(errorText) as { message?: string };
+        errorDetail = errorJson.message ?? errorText;
+      } catch {
+        // keep raw text
+      }
+      console.error("CRM API error:", crmResponse.status, errorDetail);
       return NextResponse.json(
         { error: "Failed to submit. Please try again." },
         { status: 502 },
