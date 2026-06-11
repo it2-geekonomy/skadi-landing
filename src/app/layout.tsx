@@ -1,5 +1,9 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
+import {
+  GoogleTagManagerBody,
+  GoogleTagManagerHead,
+} from "@/components/GoogleTagManager";
 import "./globals.css";
 
 const jakarta = Plus_Jakarta_Sans({
@@ -19,7 +23,11 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
+      <head>
+        <GoogleTagManagerHead />
+      </head>
       <body className={`${jakarta.variable} font-jakarta antialiased`}>
+        <GoogleTagManagerBody />
         {children}
       </body>
     </html>
