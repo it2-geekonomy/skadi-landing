@@ -38,19 +38,19 @@ const stats = [
 const flowSteps = [
   {
     lines: ["Incoming", "Customer Call"],
-    image: "/images/incomingcall.png",
+    image: "/images/incomingcall.svg",
   },
   {
     lines: ["Goes to", "Voicemail"],
-    image: "/images/voicemail.png",
+    image: "/images/voicemail.svg",
   },
   {
     lines: ["Lost", "Leads"],
-    image: "/images/lostleades.png",
+    image: "/images/lostleades.svg",
   },
   {
     lines: ["Competitor", "Wins"],
-    image: "/images/Competitor.png",
+    image: "/images/Competitor.svg",
   },
 ];
 
