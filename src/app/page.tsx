@@ -6,6 +6,7 @@ import Features from "@/components/Features";
 import Performance from "@/components/Performance";
 import Testimonials from "@/components/Testimonials";
 import Contact from "@/components/Contact";
+import FAQ from "@/components/FAQ";
 import Footer from "@/components/Footer";
 
 export default function Home() {
@@ -19,6 +20,7 @@ export default function Home() {
       <Features />
       <Testimonials />
       <Contact />
+      <FAQ />
       <Footer />
     </main>
   );
