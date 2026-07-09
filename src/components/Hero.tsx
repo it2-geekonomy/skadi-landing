@@ -197,7 +197,7 @@ export default function Hero() {
           </div>
         </div>
 
-        <div className="relative mx-auto mt-4 max-w-6xl lg:mt-8">
+        {/* <div className="relative mx-auto mt-4 max-w-6xl lg:mt-8">
           <div className="relative overflow-hidden rounded-3xl border border-white/10 shadow-2xl shadow-black/40">
             <Image
               src="/images/v139_627.png"
@@ -208,7 +208,7 @@ export default function Hero() {
               priority
             />
           </div>
-        </div>
+        </div> */}
       </div>
     </section>
   );
