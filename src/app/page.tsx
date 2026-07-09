@@ -19,7 +19,7 @@ export default function Home() {
       <Features />
       <Testimonials />
       <Contact />
-      {/* <Footer /> */}
+      <Footer />
     </main>
   );
 }

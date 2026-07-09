@@ -1,6 +1,7 @@
 import Image from "next/image";
 import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import DemoRequestForm from "@/components/DemoRequestForm";
 import { demoTestimonials } from "@/data/testimonials";
 
@@ -120,6 +121,8 @@ export default function DemoPage() {
           {/* <div id="scheduler" className="mt-16">…</div> */}
         </div>
       </section>
+
+      <Footer />
     </main>
   );
 }

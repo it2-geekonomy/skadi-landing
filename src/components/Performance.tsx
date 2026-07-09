@@ -170,7 +170,7 @@ export default function Performance() {
   const { ref, progress } = useMetricsAnimation();
 
   return (
-    <section className="section-pad">
+    <section id="performance" className="section-pad">
       <div className="container-main">
         <div
           ref={ref}
