@@ -2,10 +2,10 @@ import Image from "next/image";
 import Link from "next/link";
 
 const links = [
-  { href: "#how-it-works", label: "How It Works" },
-  { href: "#features", label: "Industries" },
-  { href: "#features", label: "Features" },
-  { href: "#demo", label: "Contact Us" },
+  { href: "/#how-it-works", label: "How It Works" },
+  { href: "/#features", label: "Industries" },
+  { href: "/#features", label: "Features" },
+  { href: "/#demo", label: "Contact Us" },
 ];
 
 export default function Navbar() {
@@ -33,7 +33,7 @@ export default function Navbar() {
             </Link>
           ))}
         </div>
-        <Link href="#demo" className="btn-demo">
+        <Link href="/demo" className="btn-demo">
           Book a Demo
         </Link>
       </div>

@@ -3,11 +3,24 @@ import { NextResponse } from "next/server";
 type ContactPayload = {
   firstName?: string;
   lastName?: string;
+  name?: string;
   email?: string;
   phone?: string;
+  company?: string;
+  source?: string;
 };
 
-const CRM_SOURCE = "Skadi Website Contact Form";
+const DEFAULT_SOURCE = "Skadi Website Contact Form";
+
+function splitName(full: string): { firstName: string; lastName: string } {
+  const parts = full.trim().split(/\s+/).filter(Boolean);
+  if (parts.length === 0) return { firstName: "", lastName: "" };
+  if (parts.length === 1) return { firstName: parts[0], lastName: parts[0] };
+  return {
+    firstName: parts[0],
+    lastName: parts.slice(1).join(" "),
+  };
+}
 
 export async function POST(request: Request) {
   const apiUrl = process.env.CRM_API_URL;
@@ -29,10 +42,19 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Invalid request body" }, { status: 400 });
   }
 
-  const firstName = body.firstName?.trim() ?? "";
-  const lastName = body.lastName?.trim() ?? "";
   const email = body.email?.trim() ?? "";
   const phone = body.phone?.trim() ?? "";
+  const company = body.company?.trim() ?? "";
+  const source = body.source?.trim() || DEFAULT_SOURCE;
+
+  let firstName = body.firstName?.trim() ?? "";
+  let lastName = body.lastName?.trim() ?? "";
+
+  if ((!firstName || !lastName) && body.name?.trim()) {
+    const split = splitName(body.name);
+    if (!firstName) firstName = split.firstName;
+    if (!lastName) lastName = split.lastName;
+  }
 
   if (!firstName || !lastName || !email || !phone) {
     return NextResponse.json(
@@ -48,8 +70,10 @@ export async function POST(request: Request) {
     );
   }
 
-  const fullName = `${firstName} ${lastName}`;
-  const client = email.includes("@") ? email.split("@")[1] : "Unknown";
+  const fullName = `${firstName} ${lastName}`.trim();
+  const client =
+    company ||
+    (email.includes("@") ? (email.split("@")[1] ?? "Unknown") : "Unknown");
 
   try {
     const crmResponse = await fetch(apiUrl, {
@@ -67,7 +91,7 @@ export async function POST(request: Request) {
         phone,
         client,
         title: "Demo Request",
-        source: CRM_SOURCE,
+        source,
       }),
     });
 

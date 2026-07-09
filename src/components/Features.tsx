@@ -89,7 +89,7 @@ export default function Features() {
               work.
             </p>
             <Link
-              href="#demo"
+              href="/demo"
               className="btn-demo mt-6 inline-flex items-center gap-2"
             >
               Book a Free Demo

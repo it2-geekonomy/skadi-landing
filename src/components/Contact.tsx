@@ -76,7 +76,13 @@ export default function Contact() {
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ firstName, lastName, email, phone }),
+        body: JSON.stringify({
+          firstName,
+          lastName,
+          email,
+          phone,
+          source: "Skadi Website Contact Form",
+        }),
       });
 
       const data = (await response.json()) as { error?: string };
