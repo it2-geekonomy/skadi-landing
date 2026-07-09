@@ -1,7 +1,6 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import MissedCalls from "@/components/MissedCalls";
-import Solution from "@/components/Solution";
 import HowItWorks from "@/components/HowItWorks";
 import Features from "@/components/Features";
 import Performance from "@/components/Performance";
@@ -14,11 +13,10 @@ export default function Home() {
     <main className="min-h-screen bg-skadi-bg">
       <Navbar />
       <Hero />
-      <Solution />
+      <Performance />
       <MissedCalls />
       <HowItWorks />
       <Features />
-      <Performance />
       <Testimonials />
       <Contact />
       {/* <Footer /> */}

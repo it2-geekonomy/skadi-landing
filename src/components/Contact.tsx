@@ -1,29 +1,7 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-
-const benefits = [
-  "Live 15-minute walkthrough",
-  "See it handle HVAC, plumbing & electrical calls",
-  "Custom setup plan for your business",
-  "No credit card. Live in 48 hours.",
-];
-
-function TickIcon() {
-  return (
-    <svg viewBox="0 0 16 16" fill="none" className="h-4 w-4 shrink-0">
-      <circle cx="8" cy="8" r="8" fill="#6e964f" />
-      <path
-        d="M4.5 8l2.5 2.5 4.5-5"
-        stroke="white"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
 
 function ContactGrid() {
   return (
@@ -60,12 +38,21 @@ function ContactGlow() {
 
 export default function Contact() {
   const router = useRouter();
+  const formRef = useRef<HTMLDivElement>(null);
+  const [showForm, setShowForm] = useState(false);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("");
+
+  function handleGetStarted() {
+    setShowForm(true);
+    requestAnimationFrame(() => {
+      formRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    });
+  }
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -107,110 +94,115 @@ export default function Contact() {
           <ContactGlow />
           <ContactGrid />
 
-          <div className="relative z-[2] flex flex-col gap-10 lg:flex-row lg:gap-[60px]">
-            <div className="min-w-0 flex-1">
-            <div className="badge">
-              <span className="badge-dot" />
-              Book a Free Demo
-            </div>
-            <h2 className="mt-4 text-[28px] font-normal leading-tight tracking-[-1px] sm:text-[38px] lg:text-[42px]">
-              See Skadi live in{" "}
-              <span className="serif-italic gradient-serif">15 minutes.</span>
+          <div className="relative z-[2] flex flex-col items-center text-center">
+            <h2 className="max-w-[820px] text-[28px] font-normal leading-tight tracking-[-1px] sm:text-[38px] lg:text-[42px]">
+              Grow Your Business with AI That{" "}
+              <span className="serif-italic gradient-serif">Never Misses a Call</span>
             </h2>
-            <p className="mt-3.5 max-w-[474px] text-base leading-relaxed text-skadi-muted">
-              No pitch decks. No slides. We&apos;ll show you Skadi handling real
-              calls for businesses in your industry, then set it up for yours.
-            </p>
-            <ul className="mt-8 flex flex-col gap-3.5 sm:mt-10">
-              {benefits.map((b) => (
-                <li
-                  key={b}
-                  className="flex items-start gap-3 text-[15px] font-light text-skadi-muted sm:text-base"
-                >
-                  <TickIcon />
-                  {b}
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="w-full min-w-0 shrink-0 rounded-[18px] border border-white/10 bg-[#0a0a0a]/75 p-6 backdrop-blur-sm sm:p-8 lg:w-[540px] lg:p-10">
-            <h3 className="text-[22px] font-medium sm:text-[26px]">Request Your Demo</h3>
-            <p className="mt-2 text-[14px] text-skadi-muted sm:text-[15px]">
-              We&apos;ll reach out within one business day to schedule.
+            <p className="mt-4 max-w-[640px] text-base leading-relaxed text-skadi-muted sm:mt-5 sm:text-[17px]">
+              From answering customer questions to scheduling appointments, Skadi helps
+              you capture every opportunity while your team focuses on what matters most.
             </p>
 
-            <form className="mt-6 sm:mt-8" onSubmit={handleSubmit}>
-                <div className="mb-[18px] flex flex-col gap-[18px] sm:flex-row sm:gap-4">
-                  <div className="form-group relative min-w-0 flex-1">
-                    <label htmlFor="firstName">First Name</label>
+            {!showForm && (
+              <button
+                type="button"
+                className="btn-demo mt-8 px-8 py-3.5 sm:mt-10 sm:px-10 sm:py-4"
+                onClick={handleGetStarted}
+              >
+                Get Started Today
+              </button>
+            )}
+
+            <div
+              ref={formRef}
+              className={`w-full max-w-[540px] transition-all duration-500 ease-out ${
+                showForm
+                  ? "mt-10 max-h-[900px] opacity-100 sm:mt-12"
+                  : "pointer-events-none mt-0 max-h-0 overflow-hidden opacity-0"
+              }`}
+              aria-hidden={!showForm}
+            >
+              <div className="rounded-[18px] border border-white/10 bg-[#0a0a0a]/75 p-6 text-left backdrop-blur-sm sm:p-8 lg:p-10">
+                <h3 className="text-[22px] font-medium sm:text-[26px]">
+                  Request Your Demo
+                </h3>
+                <p className="mt-2 text-[14px] text-skadi-muted sm:text-[15px]">
+                  We&apos;ll reach out within one business day to schedule.
+                </p>
+
+                <form className="mt-6 sm:mt-8" onSubmit={handleSubmit}>
+                  <div className="mb-[18px] flex flex-col gap-[18px] sm:flex-row sm:gap-4">
+                    <div className="form-group relative min-w-0 flex-1">
+                      <label htmlFor="firstName">First Name</label>
+                      <input
+                        id="firstName"
+                        type="text"
+                        className="form-input"
+                        placeholder="John"
+                        value={firstName}
+                        onChange={(e) => setFirstName(e.target.value)}
+                        required
+                        disabled={status === "loading"}
+                      />
+                    </div>
+                    <div className="form-group relative min-w-0 flex-1">
+                      <label htmlFor="lastName">Last Name</label>
+                      <input
+                        id="lastName"
+                        type="text"
+                        className="form-input"
+                        placeholder="Doe"
+                        value={lastName}
+                        onChange={(e) => setLastName(e.target.value)}
+                        required
+                        disabled={status === "loading"}
+                      />
+                    </div>
+                  </div>
+                  <div className="form-group relative mb-[18px]">
+                    <label htmlFor="phone">Mobile Number</label>
                     <input
-                      id="firstName"
-                      type="text"
+                      id="phone"
+                      type="tel"
                       className="form-input"
-                      placeholder="John"
-                      value={firstName}
-                      onChange={(e) => setFirstName(e.target.value)}
+                      placeholder="+1 (555) 000-0000"
+                      value={phone}
+                      onChange={(e) => setPhone(e.target.value)}
                       required
                       disabled={status === "loading"}
                     />
                   </div>
-                  <div className="form-group relative min-w-0 flex-1">
-                    <label htmlFor="lastName">Last Name</label>
+                  <div className="form-group relative mb-2">
+                    <label htmlFor="email">Business Email</label>
                     <input
-                      id="lastName"
-                      type="text"
+                      id="email"
+                      type="email"
                       className="form-input"
-                      placeholder="Doe"
-                      value={lastName}
-                      onChange={(e) => setLastName(e.target.value)}
+                      placeholder="you@company.com"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
                       required
                       disabled={status === "loading"}
                     />
                   </div>
-                </div>
-                <div className="form-group relative mb-[18px]">
-                  <label htmlFor="phone">Mobile Number</label>
-                  <input
-                    id="phone"
-                    type="tel"
-                    className="form-input"
-                    placeholder="+1 (555) 000-0000"
-                    value={phone}
-                    onChange={(e) => setPhone(e.target.value)}
-                    required
-                    disabled={status === "loading"}
-                  />
-                </div>
-                <div className="form-group relative mb-2">
-                  <label htmlFor="email">Business Email</label>
-                  <input
-                    id="email"
-                    type="email"
-                    className="form-input"
-                    placeholder="you@company.com"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                    disabled={status === "loading"}
-                  />
-                </div>
 
-                {status === "error" && errorMessage && (
-                  <p className="mt-3 text-sm text-red-400" role="alert">
-                    {errorMessage}
-                  </p>
-                )}
+                  {status === "error" && errorMessage && (
+                    <p className="mt-3 text-sm text-red-400" role="alert">
+                      {errorMessage}
+                    </p>
+                  )}
 
-                <button
-                  type="submit"
-                  className="btn-demo mt-2 w-full py-3.5 sm:py-4 disabled:cursor-not-allowed disabled:opacity-60"
-                  disabled={status === "loading"}
-                >
-                  {status === "loading" ? "Submitting..." : "Book a Free Demo"}
-                </button>
-            </form>
-          </div>
+                  <button
+                    type="submit"
+                    className="btn-demo mt-2 w-full py-3.5 sm:py-4 disabled:cursor-not-allowed disabled:opacity-60"
+                    disabled={status === "loading"}
+                  >
+                    {status === "loading" ? "Submitting..." : "Book a Free Demo"}
+                  </button>
+                </form>
+              </div>
+            </div>
           </div>
         </div>
       </div>
