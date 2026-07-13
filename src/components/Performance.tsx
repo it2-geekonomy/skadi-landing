@@ -77,73 +77,50 @@ function useMetricsAnimation() {
 function MetricCell({
   metric,
   progress,
-  className = "",
 }: {
   metric: Metric;
   progress: number;
-  className?: string;
 }) {
   const display = formatMetricValue(metric, progress);
 
   return (
-    <div className={`min-w-0 ${className}`}>
+    <div className="min-w-0">
       <p
-        className="text-[36px] font-normal leading-none tracking-[-0.5px] text-white sm:text-[40px] lg:text-[30px] xl:text-[34px] 2xl:text-[50px]"
+        className="text-[40px] font-normal leading-none tracking-[-0.5px] text-white sm:text-[44px] lg:text-[42px] xl:text-[50px] 2xl:text-[56px]"
         aria-label={`${metric.end}${metric.suffix ?? metric.fraction ?? ""}`}
       >
         {display}
       </p>
-      <p className="mt-2 text-[12px] leading-snug text-skadi-muted sm:mt-3 sm:text-[14px] lg:mt-3 2xl:mt-4">
+      <p className="mt-2.5 text-[13px] leading-snug text-skadi-muted sm:mt-3 sm:text-[14px] xl:text-[15px]">
         {metric.label}
       </p>
     </div>
   );
 }
 
-function MetricsMobileGrid({ progress }: { progress: number }) {
+function MetricsGrid({ progress }: { progress: number }) {
   return (
-    <div className="grid grid-cols-2 gap-x-6 gap-y-12">
-      {metrics.map((m) => (
-        <MetricCell key={m.label} metric={m} progress={progress} />
-      ))}
-    </div>
-  );
-}
+    <div className="grid w-full grid-cols-2 gap-y-10 sm:grid-cols-3 sm:gap-y-12 lg:gap-y-14">
+      {metrics.map((m, i) => {
+        const mobileDivider = i % 2 === 1;
+        const desktopDivider = i % 3 !== 0;
 
-function MetricsFlexRow({ progress }: { progress: number }) {
-  return (
-    <div className="flex w-full min-w-0 items-stretch">
-      {metrics.flatMap((m, i) => {
-        const widthClass =
-          i === 2 ? "flex-[1.35]" : i === 3 ? "flex-[0.85]" : "flex-1";
-
-        const cell = (
-          <MetricCell
+        return (
+          <div
             key={m.label}
-            metric={m}
-            progress={progress}
-            className={`${widthClass} ${
-              i === 0
-                ? "pr-1 sm:pr-3 lg:pr-2 xl:pr-4 2xl:pr-5"
-                : i === metrics.length - 1
-                  ? "pl-1 sm:pl-3 lg:pl-2 xl:pl-4 2xl:pl-5"
-                  : "px-1 sm:px-3 lg:px-2 xl:px-4 2xl:px-5"
+            className={`min-w-0 ${
+              mobileDivider
+                ? "border-l border-white/[0.1] pl-5 sm:pl-0"
+                : ""
+            } ${
+              desktopDivider
+                ? "sm:border-l sm:border-white/[0.1] sm:pl-6 lg:pl-8 xl:pl-10"
+                : "sm:border-l-0"
             }`}
-          />
+          >
+            <MetricCell metric={m} progress={progress} />
+          </div>
         );
-
-        if (i < metrics.length - 1) {
-          return [
-            cell,
-            <div
-              key={`divider-${m.label}`}
-              className="mx-1 w-px shrink-0 self-stretch bg-white/[0.1] sm:mx-2 lg:mx-2 xl:mx-4 2xl:mx-5"
-              aria-hidden="true"
-            />,
-          ];
-        }
-
-        return [cell];
       })}
     </div>
   );
@@ -185,35 +162,28 @@ export default function Performance() {
             }}
           />
 
-          <div className="relative z-[1] flex flex-col lg:min-h-[420px] lg:flex-row">
-            <div className="flex min-w-0 flex-[1.7] flex-col lg:pr-12">
-              <div>
-                <div
-                  className="badge border border-white/[0.06]"
-                  style={{ background: "rgba(255,255,255,0.08)" }}
-                >
-                  <span className="badge-dot" />
-                  Live Performance
-                </div>
-                <h2 className="mt-5 text-[30px] font-normal leading-[1.15] tracking-[-1px] sm:text-[38px] lg:text-[42px] 2xl:whitespace-nowrap">
-                  Real numbers from businesses{" "}
-                  <span className="serif-italic gradient-serif">like yours.</span>
-                </h2>
-                <p className="mt-5 max-w-[498px] text-[15px] leading-relaxed text-skadi-muted">
-                  Skadi handles every call with consistency, speed, and accuracy
-                  — so your team can focus on the work, not the phone.
-                </p>
+          <div className="relative z-[1] flex flex-col">
+            <div>
+              <div
+                className="badge border border-white/[0.06]"
+                style={{ background: "rgba(255,255,255,0.08)" }}
+              >
+                <span className="badge-dot" />
+                Live Performance
               </div>
-
-              <div className="mt-auto w-full pt-14 sm:hidden">
-                <MetricsMobileGrid progress={progress} />
-              </div>
-
-              <div className="mt-auto hidden w-full pt-14 sm:block lg:pt-16 2xl:pt-20">
-                <MetricsFlexRow progress={progress} />
-              </div>
+              <h2 className="mt-5 text-[30px] font-normal leading-[1.15] tracking-[-1px] sm:text-[38px] lg:text-[42px]">
+                Real numbers from businesses{" "}
+                <span className="serif-italic gradient-serif">like yours.</span>
+              </h2>
+              <p className="mt-5 max-w-[560px] text-[15px] leading-relaxed text-skadi-muted">
+                Skadi handles every call with consistency, speed, and accuracy
+                — so your team can focus on the work, not the phone.
+              </p>
             </div>
 
+            <div className="mt-10 w-full sm:mt-12 lg:mt-14">
+              <MetricsGrid progress={progress} />
+            </div>
           </div>
         </div>
       </div>
