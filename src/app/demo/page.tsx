@@ -48,18 +48,23 @@ export default function DemoPage() {
         />
 
         <div className="container-main relative z-[1]">
-          <div className="flex flex-col gap-12 lg:flex-row lg:items-start lg:gap-14 xl:gap-20">
-            {/* Left — value prop */}
-            <div className="min-w-0 flex-1">
+          <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-2 lg:gap-12 xl:gap-16">
+            {/* Left — form */}
+            <div className="w-full">
+              <DemoRequestForm />
+            </div>
+
+            {/* Right — value prop */}
+            <div className="min-w-0 w-full lg:pt-2">
               <div className="badge">
                 <span className="badge-dot" />
                 Book a Free Demo
               </div>
-              <h1 className="mt-5 text-[32px] font-normal leading-tight tracking-[-1px] sm:text-[42px] lg:text-[48px]">
+              <h1 className="mt-5 text-[32px] font-normal leading-tight tracking-[-1px] sm:text-[42px] lg:text-[44px] xl:text-[48px]">
                 See Skadi live in{" "}
                 <span className="serif-italic gradient-serif">15 minutes.</span>
               </h1>
-              <p className="mt-4 max-w-[480px] text-[15px] leading-relaxed text-skadi-muted sm:text-base">
+              <p className="mt-4 text-[15px] leading-relaxed text-skadi-muted sm:text-base">
                 No pitch decks. No slides. We&apos;ll show you Skadi handling
                 real calls for businesses in your industry, then map a setup plan
                 for yours.
@@ -75,11 +80,6 @@ export default function DemoPage() {
                   </li>
                 ))}
               </ul>
-            </div>
-
-            {/* Right — form */}
-            <div className="w-full shrink-0 lg:max-w-[480px]">
-              <DemoRequestForm />
             </div>
           </div>
 
