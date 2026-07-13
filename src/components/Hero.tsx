@@ -2,9 +2,9 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+// import { useState } from "react";
 import SectionAurora from "@/components/SectionAurora";
-import HeroLeadForm from "@/components/HeroLeadForm";
+// import HeroLeadForm from "@/components/HeroLeadForm";
 
 const tinyStars = Array.from({ length: 72 }, (_, i) => ({
   top: `${((i * 17 + 11) % 94) + 2}%`,
@@ -118,7 +118,7 @@ function TickIcon() {
 }
 
 export default function Hero() {
-  const [deckMessage, setDeckMessage] = useState(false);
+  // const [deckMessage, setDeckMessage] = useState(false);
 
   return (
     <section
@@ -173,7 +173,7 @@ export default function Hero() {
               <Link href="/demo" className="btn-demo">
                 Book a Demo
               </Link>
-              <button
+              {/* <button
                 type="button"
                 className="btn-action"
                 onClick={() => {
@@ -182,19 +182,19 @@ export default function Hero() {
                 }}
               >
                 Download Deck
-              </button>
+              </button> */}
             </div>
-            {deckMessage && (
+            {/* {deckMessage && (
               <p className="mt-3 text-sm text-skadi-muted" role="status">
                 Deck coming soon — we&apos;ll add the PDF when it&apos;s ready.
               </p>
-            )}
+            )} */}
           </div>
 
           {/* Right — two-step lead form */}
-          <div className="w-full shrink-0 lg:max-w-[420px] xl:max-w-[460px]">
+          {/* <div className="w-full shrink-0 lg:max-w-[420px] xl:max-w-[460px]">
             <HeroLeadForm />
-          </div>
+          </div> */}
         </div>
 
         {/* <div className="relative mx-auto mt-4 max-w-6xl lg:mt-8">
