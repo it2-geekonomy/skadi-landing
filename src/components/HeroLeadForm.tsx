@@ -81,7 +81,7 @@ export default function HeroLeadForm() {
 
           <form className="mt-6" onSubmit={handleStepOne}>
             <div className="form-group relative mb-[18px]">
-              <label htmlFor="hero-name">Full Name</label>
+              <label htmlFor="hero-name"></label>
               <input
                 id="hero-name"
                 type="text"
@@ -94,7 +94,7 @@ export default function HeroLeadForm() {
               />
             </div>
             <div className="form-group relative mb-2">
-              <label htmlFor="hero-email">Work Email</label>
+              <label htmlFor="hero-email"></label>
               <input
                 id="hero-email"
                 type="email"

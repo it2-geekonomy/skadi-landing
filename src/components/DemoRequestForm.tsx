@@ -59,7 +59,7 @@ export default function DemoRequestForm() {
       <form className="mt-6 sm:mt-8" onSubmit={handleSubmit}>
         <div className="mb-[18px] flex flex-col gap-[18px] sm:flex-row sm:gap-4">
           <div className="form-group relative min-w-0 flex-1">
-            <label htmlFor="demo-firstName">First Name</label>
+            <label htmlFor="demo-firstName"></label>
             <input
               id="demo-firstName"
               type="text"
@@ -72,7 +72,7 @@ export default function DemoRequestForm() {
             />
           </div>
           <div className="form-group relative min-w-0 flex-1">
-            <label htmlFor="demo-lastName">Last Name</label>
+            <label htmlFor="demo-lastName"></label>
             <input
               id="demo-lastName"
               type="text"
@@ -86,7 +86,7 @@ export default function DemoRequestForm() {
           </div>
         </div>
         <div className="form-group relative mb-[18px]">
-          <label htmlFor="demo-email">Work Email</label>
+          <label htmlFor="demo-email"></label>
           <input
             id="demo-email"
             type="email"
@@ -99,7 +99,7 @@ export default function DemoRequestForm() {
           />
         </div>
         <div className="form-group relative mb-[18px]">
-          <label htmlFor="demo-phone">Phone Number</label>
+          <label htmlFor="demo-phone"></label>
           <input
             id="demo-phone"
             type="tel"
@@ -112,7 +112,7 @@ export default function DemoRequestForm() {
           />
         </div>
         <div className="form-group relative mb-2">
-          <label htmlFor="demo-company">Company Name</label>
+          <label htmlFor="demo-company"></label>
           <input
             id="demo-company"
             type="text"

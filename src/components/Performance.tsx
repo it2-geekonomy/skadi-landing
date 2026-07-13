@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
 type Metric = {
@@ -16,16 +15,11 @@ const metrics: Metric[] = [
   { label: "Avg answer latency", end: 1.4, suffix: "s", decimals: 1 },
   { label: "Avg QA score", end: 87, fraction: "/100" },
   { label: "Bookings increase", end: 41, suffix: "%" },
+  { label: "Industries served", end: 12, suffix: "+" },
+  { label: "Clients", end: 85, suffix: "+" },
 ];
 
-const highlights = [
-  "No missed calls, ever",
-  "No missed calls, ever",
-  "No missed calls, ever",
-];
 
-const highlightDesc =
-  "Positive, neutral, or negative — understand how every caller feels, and act on it before it becomes a review.";
 
 const DURATION_MS = 1600;
 
@@ -78,18 +72,7 @@ function useMetricsAnimation() {
   return { ref, progress, hasAnimated };
 }
 
-function HighlightIcon() {
-  return (
-    <Image
-      src="/images/Vector.svg"
-      alt=""
-      width={11}
-      height={11}
-      className="mt-0.5 h-[11px] w-[11px] shrink-0"
-      aria-hidden
-    />
-  );
-}
+
 
 function MetricCell({
   metric,
@@ -217,7 +200,8 @@ export default function Performance() {
                   <span className="serif-italic gradient-serif">like yours.</span>
                 </h2>
                 <p className="mt-5 max-w-[498px] text-[15px] leading-relaxed text-skadi-muted">
-                  {highlightDesc}
+                  Skadi handles every call with consistency, speed, and accuracy
+                  — so your team can focus on the work, not the phone.
                 </p>
               </div>
 
@@ -230,25 +214,6 @@ export default function Performance() {
               </div>
             </div>
 
-            <div className="relative mt-12 flex min-w-0 flex-[1] flex-col justify-center gap-10 lg:mt-0 lg:pl-12">
-              <div
-                className="pointer-events-none absolute bottom-8 left-0 top-8 hidden w-px bg-white/[0.12] lg:block"
-                aria-hidden="true"
-              />
-              {highlights.map((title, i) => (
-                <div key={i}>
-                  <div className="flex items-start gap-2.5">
-                    <HighlightIcon />
-                    <p className="text-[15px] font-normal leading-snug text-white">
-                      {title}
-                    </p>
-                  </div>
-                  <p className="mt-2.5 pl-5 text-[15px] leading-relaxed text-skadi-muted">
-                    {highlightDesc}
-                  </p>
-                </div>
-              ))}
-            </div>
           </div>
         </div>
       </div>

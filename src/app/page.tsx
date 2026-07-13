@@ -3,6 +3,7 @@ import Hero from "@/components/Hero";
 import MissedCalls from "@/components/MissedCalls";
 import HowItWorks from "@/components/HowItWorks";
 import Features from "@/components/Features";
+import AIFeatures from "@/components/AIFeatures";
 import Performance from "@/components/Performance";
 import Testimonials from "@/components/Testimonials";
 import Contact from "@/components/Contact";
@@ -16,6 +17,7 @@ export default function Home() {
       <Hero />
       <Performance />
       <MissedCalls />
+      <AIFeatures />
       <HowItWorks />
       <Features />
       <Testimonials />
