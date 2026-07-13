@@ -123,7 +123,7 @@ export default function AIFeatures() {
         </div>
 
         {/* Main layout */}
-        <div className="flex w-full flex-col gap-8 sm:gap-10 lg:flex-row lg:items-center lg:gap-16">
+        <div className="flex w-full flex-col gap-8 sm:flex-row sm:items-center sm:gap-8 lg:gap-16">
           {/* Left — headline + step timeline */}
           <div className="flex min-w-0 flex-1 flex-col">
             <h3 style={{ fontSize: "clamp(22px, 3.2vw, 44px)", marginBottom: "clamp(24px, 3vw, 40px)" }} className="font-normal leading-snug tracking-[-0.5px] text-white">
@@ -247,7 +247,7 @@ export default function AIFeatures() {
           </div>
 
           {/* Right — image inside dark padded frame */}
-          <div className="mx-auto w-full max-w-[520px] sm:max-w-[580px] md:max-w-[620px] lg:mx-0 lg:max-w-[640px] xl:max-w-[720px]">
+          <div className="mx-auto w-full max-w-[520px] sm:mx-0 sm:flex-1 sm:max-w-[580px] md:max-w-[620px] lg:max-w-[640px] xl:max-w-[720px]">
             {/* Outer dark frame */}
             <div
               style={{
