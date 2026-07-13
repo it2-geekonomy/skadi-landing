@@ -38,8 +38,26 @@ export default function AIFeatures() {
   const [imgVisible, setImgVisible] = useState(true);
   // 0→1 fill progress for the line below the active dot
   const [fillProgress, setFillProgress] = useState(0);
+  const [inView, setInView] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
   const rafRef = useRef<number | null>(null);
   const startRef = useRef<number | null>(null);
+
+  // IntersectionObserver to only animate when in viewport
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setInView(entry.isIntersecting);
+      },
+      { threshold: 0.15 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   // rAF loop: fills the active line from 0 → 1 over AUTO_ADVANCE_MS
   const startFill = () => {
@@ -61,15 +79,20 @@ export default function AIFeatures() {
     rafRef.current = requestAnimationFrame(tick);
   };
 
-  // Kick off fill on mount and whenever active changes
+  // Kick off fill when in view and active changes
   useEffect(() => {
+    if (!inView) {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+      setFillProgress(0);
+      return;
+    }
     setFillProgress(0);
     startFill();
     return () => {
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [active]);
+  }, [active, inView]);
 
   // Crossfade image on step change
   useEffect(() => {
@@ -84,7 +107,7 @@ export default function AIFeatures() {
   };
 
   return (
-    <section id="ai-features" className="section-pad bg-black">
+    <section ref={sectionRef} id="ai-features" className="section-pad bg-black">
       <div className="container-main flex flex-col items-center gap-10 sm:gap-14 lg:gap-[80px]">
         {/* Header */}
         <div className="w-full text-center">
