@@ -1,7 +1,7 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import MissedCalls from "@/components/MissedCalls";
-import HowItWorks from "@/components/HowItWorks";
+// import HowItWorks from "@/components/HowItWorks";
 import Features from "@/components/Features";
 import AIFeatures from "@/components/AIFeatures";
 import Performance from "@/components/Performance";
@@ -18,7 +18,7 @@ export default function Home() {
       <Performance />
       <MissedCalls />
       <AIFeatures />
-      <HowItWorks />
+      {/* <HowItWorks /> */}
       <Features />
       <Testimonials />
       <Contact />
