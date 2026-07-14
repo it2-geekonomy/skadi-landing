@@ -116,11 +116,10 @@ export default function Contact() {
 
             <div
               ref={formRef}
-              className={`w-full max-w-[540px] transition-all duration-500 ease-out ${
-                showForm
-                  ? "mt-10 max-h-[900px] opacity-100 sm:mt-12"
-                  : "pointer-events-none mt-0 max-h-0 overflow-hidden opacity-0"
-              }`}
+              className={`w-full max-w-[540px] transition-all duration-500 ease-out ${showForm
+                ? "mt-10 max-h-[900px] opacity-100 sm:mt-12"
+                : "pointer-events-none mt-0 max-h-0 overflow-hidden opacity-0"
+                }`}
               aria-hidden={!showForm}
             >
               <div className="rounded-[18px] border border-white/10 bg-[#0a0a0a]/75 p-6 text-left backdrop-blur-sm sm:p-8 lg:p-10">
@@ -139,7 +138,7 @@ export default function Contact() {
                         id="firstName"
                         type="text"
                         className="form-input"
-                        placeholder="John"
+                        placeholder="First Name"
                         value={firstName}
                         onChange={(e) => setFirstName(e.target.value)}
                         required
@@ -152,7 +151,7 @@ export default function Contact() {
                         id="lastName"
                         type="text"
                         className="form-input"
-                        placeholder="Doe"
+                        placeholder="Last Name"
                         value={lastName}
                         onChange={(e) => setLastName(e.target.value)}
                         required

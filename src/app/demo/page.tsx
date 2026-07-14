@@ -48,15 +48,15 @@ export default function DemoPage() {
         />
 
         <div className="container-main relative z-[1]">
-          <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-2 lg:gap-12 xl:gap-16">
+          <div className="grid grid-cols-1 items-stretch gap-10 lg:grid-cols-2 lg:gap-12 xl:gap-16">
             {/* Left — form */}
             <div className="w-full">
               <DemoRequestForm />
             </div>
 
             {/* Right — value prop */}
-            <div className="min-w-0 w-full lg:pt-2">
-              <div className="badge">
+            <div className="min-w-0 w-full flex flex-col lg:pt-2">
+              <div className="badge w-fit">
                 <span className="badge-dot" />
                 Book a Free Demo
               </div>
@@ -64,22 +64,18 @@ export default function DemoPage() {
                 See Skadi live in{" "}
                 <span className="serif-italic gradient-serif">15 minutes.</span>
               </h1>
-              <p className="mt-4 text-[15px] leading-relaxed text-skadi-muted sm:text-base">
-                No pitch decks. No slides. We&apos;ll show you Skadi handling
-                real calls for businesses in your industry, then map a setup plan
-                for yours.
-              </p>
-              <ul className="mt-8 flex flex-col gap-3.5">
-                {benefits.map((b) => (
-                  <li
-                    key={b}
-                    className="flex items-start gap-3 text-[15px] font-light text-skadi-muted"
-                  >
-                    <TickIcon />
-                    {b}
-                  </li>
-                ))}
-              </ul>
+              <div className="mt-10 flex-1 relative overflow-hidden rounded-[18px] border border-white/10 bg-[#0a0a0a]/80 shadow-lg min-h-[250px]">
+                <video
+                  src="/0_Woman_Business_1920x1010.mp4"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  disablePictureInPicture
+                  disableRemotePlayback
+                  className="pointer-events-none absolute inset-0 w-full h-full object-cover"
+                />
+              </div>
             </div>
           </div>
 

@@ -50,7 +50,7 @@ export default function DemoRequestForm() {
   return (
     <div className="w-full rounded-[18px] border border-white/10 bg-[#0a0a0a]/80 p-6 backdrop-blur-sm sm:p-8">
       <h3 className="text-[22px] font-medium text-white sm:text-[26px]">
-        Book Your 15-Minute Demo
+        Book Your 15-Minutes Demo
       </h3>
 
       <form className="mt-6 sm:mt-8" onSubmit={handleSubmit}>
@@ -61,7 +61,7 @@ export default function DemoRequestForm() {
               id="demo-firstName"
               type="text"
               className="form-input"
-              placeholder="John"
+              placeholder="First Name"
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
               required
@@ -74,7 +74,7 @@ export default function DemoRequestForm() {
               id="demo-lastName"
               type="text"
               className="form-input"
-              placeholder="Doe"
+              placeholder="Last Name"
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
               required

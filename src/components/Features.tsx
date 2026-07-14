@@ -3,14 +3,14 @@ import Link from "next/link";
 
 const features = [
   {
+    title: "Built for Your Business",
+    desc: "No generic scripts. Skadi is trained on your business, your services, your pricing, your tone.",
+    icon: "/images/Built for Your Business image.svg",
+  },
+  {
     title: "Inbound Call Agent",
     desc: "Picks up every call. Qualifies, routes, and books without human intervention. Your number stays the same.",
     icon: "/images/Phone.svg",
-  },
-  {
-    title: "Outbound Batch Calls",
-    desc: "Upload a contact list. Skadi calls at scale for follow-ups, re-engagements, and seasonal campaigns.",
-    icon: "/images/Outbound.svg",
   },
   {
     title: "AI Quality Assurance",

@@ -64,7 +64,7 @@ export default function ReportRequestForm() {
               id="report-firstName"
               type="text"
               className="form-input"
-              placeholder="John"
+              placeholder="First Name"
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
               required
@@ -80,7 +80,7 @@ export default function ReportRequestForm() {
               id="report-lastName"
               type="text"
               className="form-input"
-              placeholder="Doe"
+              placeholder="Last Name"
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
               required
