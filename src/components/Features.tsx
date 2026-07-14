@@ -5,7 +5,7 @@ const features = [
   {
     title: "Built for Your Business",
     desc: "No generic scripts. Skadi is trained on your business, your services, your pricing, your tone.",
-    icon: "/images/Built for Your Business image.svg",
+    icon: "/images/chart-histogram (1) 1.svg",
   },
   {
     title: "Inbound Call Agent",
