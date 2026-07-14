@@ -83,10 +83,8 @@ export default function Features() {
             </h2>
           </div>
           <div className="w-full max-w-[550px] lg:w-auto">
-            <p className="text-base font-light leading-relaxed text-skadi-faint">
-              Built for field service businesses in TX and FL. Every feature is
-              designed to keep your pipeline full while your team focuses on the
-              work.
+            <p className="text-xl sm:text-2xl font-light leading-relaxed text-skadi-faint">
+              Ready to stop losing calls?
             </p>
             <Link
               href="/demo"
