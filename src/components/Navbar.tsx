@@ -3,9 +3,9 @@ import Link from "next/link";
 
 const links = [
   { href: "/#ai-features", label: "How It Works" },
-  { href: "/#features", label: "Features" },
   { href: "/#integrations", label: "Integrations" },
-  { href: "/#demo", label: "Contact Us" },
+  { href: "/#features", label: "Features" },
+  { href: "/demo", label: "Contact Us" },
 ];
 
 export default function Navbar() {
