@@ -7,10 +7,12 @@ type ContactPayload = {
   email?: string;
   phone?: string;
   company?: string;
+  jobTitle?: string;
   source?: string;
 };
 
 const DEFAULT_SOURCE = "Skadi Website Contact Form";
+const REPORT_SOURCE = "Skadi Industry Report";
 
 function splitName(full: string): { firstName: string; lastName: string } {
   const parts = full.trim().split(/\s+/).filter(Boolean);
@@ -45,7 +47,9 @@ export async function POST(request: Request) {
   const email = body.email?.trim() ?? "";
   const phone = body.phone?.trim() ?? "";
   const company = body.company?.trim() ?? "";
+  const jobTitle = body.jobTitle?.trim() ?? "";
   const source = body.source?.trim() || DEFAULT_SOURCE;
+  const isReportLead = source === REPORT_SOURCE;
 
   let firstName = body.firstName?.trim() ?? "";
   let lastName = body.lastName?.trim() ?? "";
@@ -56,7 +60,21 @@ export async function POST(request: Request) {
     if (!lastName) lastName = split.lastName;
   }
 
-  if (!firstName || !lastName || !email || !phone) {
+  if (!firstName || !lastName || !email) {
+    return NextResponse.json(
+      { error: "All fields are required" },
+      { status: 400 },
+    );
+  }
+
+  if (isReportLead && !jobTitle) {
+    return NextResponse.json(
+      { error: "Job title is required" },
+      { status: 400 },
+    );
+  }
+
+  if (!isReportLead && !phone) {
     return NextResponse.json(
       { error: "All fields are required" },
       { status: 400 },
@@ -75,7 +93,25 @@ export async function POST(request: Request) {
     company ||
     (email.includes("@") ? (email.split("@")[1] ?? "Unknown") : "Unknown");
 
+  const title = isReportLead
+    ? jobTitle || "Industry Report Request"
+    : "Demo Request";
+
   try {
+    const crmPayload: Record<string, string> = {
+      name: fullName,
+      firstName,
+      lastName,
+      email,
+      client,
+      title,
+      source,
+    };
+
+    if (phone) {
+      crmPayload.phone = phone;
+    }
+
     const crmResponse = await fetch(apiUrl, {
       method: "POST",
       headers: {
@@ -83,16 +119,7 @@ export async function POST(request: Request) {
         "x-api-key": apiKey,
         "x-organization-id": orgId,
       },
-      body: JSON.stringify({
-        name: fullName,
-        firstName,
-        lastName,
-        email,
-        phone,
-        client,
-        title: "Demo Request",
-        source,
-      }),
+      body: JSON.stringify(crmPayload),
     });
 
     if (!crmResponse.ok) {

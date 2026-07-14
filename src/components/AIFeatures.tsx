@@ -6,27 +6,27 @@ import { useEffect, useRef, useState } from "react";
 const steps = [
   {
     title: "AI Answers Instantly",
-    desc: "Never miss a customer call with AI voice agents available 24/7.",
+    desc: "Calls are answered in under 3 seconds, 24/7 — every lead gets a live response, instantly.",
     image: "/images/Let AI Handle Every Customer Conversation/Let AI Handle image1.png",
   },
   {
-    title: "Appointment Scheduling",
-    desc: "Qualified leads are booked directly into your calendar without human intervention.",
+    title: "Appointment / Demo Scheduling",
+    desc: "Qualified leads are booked directly into your calendar in real time, without human intervention.",
     image: "/images/Let AI Handle Every Customer Conversation/Let AI Handle image2.png",
   },
   {
     title: "Live Transcripts",
-    desc: "Every conversation is transcribed in real time for review and compliance.",
+    desc: "Every conversation is transcribed instantly, so your team knows exactly what was said and promised.",
     image: "/images/Let AI Handle Every Customer Conversation/Let AI Handle image3.png",
   },
   {
     title: "CRM Automation",
-    desc: "Call data, lead info, and outcomes sync automatically to your CRM.",
+    desc: "Call data, lead info, and outcomes sync automatically to your CRM — no manual entry, no dropped follow-ups.",
     image: "/images/Let AI Handle Every Customer Conversation/Let AI Handle image4.png",
   },
   {
     title: "Performance Analytics",
-    desc: "Track call quality, booking rates, and agent performance in one dashboard.",
+    desc: "One dashboard. Every metric that matters — call volume, quality, and booking rate, always up to date.",
     image: "/images/Let AI Handle Every Customer Conversation/Let AI Handle image5.png",
   },
 ];
@@ -112,13 +112,12 @@ export default function AIFeatures() {
         {/* Header */}
         <div className="w-full text-center">
           <h2 style={{ fontSize: "clamp(20px, 3vw, 42px)" }} className="font-normal leading-tight tracking-[-0.5px]">
-            Let AI Handle Every{" "}
-            <span className="serif-italic gradient-serif">
-              Customer Conversation
-            </span>
+            Every Call Answered in{" "}
+            <span className="serif-italic gradient-serif">Under 3 Seconds</span>
           </h2>
-          <p className="mx-auto mt-3 max-w-[520px] text-sm text-skadi-muted sm:text-base">
-            Subheading explaining the value proposition
+          <p className="mx-auto mt-3 max-w-[560px] text-sm text-skadi-muted sm:text-base">
+            No missed calls. No manual follow-up. Just qualified leads, booked
+            and logged automatically.
           </p>
         </div>
 
@@ -127,9 +126,8 @@ export default function AIFeatures() {
           {/* Left — headline + step timeline */}
           <div className="flex min-w-0 flex-1 flex-col">
             <h3 style={{ fontSize: "clamp(22px, 3.2vw, 44px)", marginBottom: "clamp(24px, 3vw, 40px)" }} className="font-normal leading-snug tracking-[-0.5px] text-white">
-              Every Call. Every Lead.
-              <br />
-              Every Opportunity.
+              Your Pipeline{" "}
+              <span className="serif-italic gradient-serif">Never Sleeps.</span>
             </h3>
 
             <ol className="relative flex flex-col">
@@ -229,7 +227,7 @@ export default function AIFeatures() {
                       <div
                         className="overflow-hidden"
                         style={{
-                          maxHeight: isActive ? "80px" : "0px",
+                          maxHeight: isActive ? "120px" : "0px",
                           opacity: isActive ? 1 : 0,
                           transition:
                             "max-height 0.35s ease, opacity 0.35s ease",

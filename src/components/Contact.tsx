@@ -96,12 +96,12 @@ export default function Contact() {
 
           <div className="relative z-[2] flex flex-col items-center text-center">
             <h2 className="max-w-[820px] text-[28px] font-normal leading-tight tracking-[-1px] sm:text-[38px] lg:text-[42px]">
-              Grow Your Business with AI That{" "}
-              <span className="serif-italic gradient-serif">Never Misses a Call</span>
+              Stop Losing Leads.{" "}
+              <span className="serif-italic gradient-serif">Start Today.</span>
             </h2>
             <p className="mt-4 max-w-[640px] text-base leading-relaxed text-skadi-muted sm:mt-5 sm:text-[17px]">
-              From answering customer questions to scheduling appointments, Skadi helps
-              you capture every opportunity while your team focuses on what matters most.
+              Get a walkthrough built around your business, call volume,
+              integrations, and everything in between.
             </p>
 
             {!showForm && (
@@ -110,7 +110,7 @@ export default function Contact() {
                 className="btn-demo mt-8 px-8 py-3.5 sm:mt-10 sm:px-10 sm:py-4"
                 onClick={handleGetStarted}
               >
-                Get Started Today
+                Book a Demo
               </button>
             )}
 

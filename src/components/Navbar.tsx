@@ -2,10 +2,10 @@ import Image from "next/image";
 import Link from "next/link";
 
 const links = [
-  { href: "/#how-it-works", label: "How It Works" },
-  { href: "/#features", label: "Industries" },
+  { href: "/#ai-features", label: "How It Works" },
+  { href: "/#integrations", label: "Integrations" },
   { href: "/#features", label: "Features" },
-  { href: "/#demo", label: "Contact Us" },
+  { href: "/demo", label: "Contact Us" },
 ];
 
 export default function Navbar() {
