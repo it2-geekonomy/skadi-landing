@@ -110,12 +110,12 @@ export default function Testimonials() {
             Testimonials
           </div>
           <h2 className="mt-4 text-[32px] font-normal tracking-[-1px] sm:text-[42px]">
-            What People{" "}
-            <span className="serif-italic gradient-serif">Are Saying</span>
+            Don&apos;t Just Take Our{" "}
+            <span className="serif-italic gradient-serif">Word For It</span>
           </h2>
           <p className="mx-auto mt-3 max-w-[636px] text-base text-skadi-muted">
-            Skadi answers, qualifies, schedules, and tracks every customer
-            conversation so you never miss a revenue opportunity.
+            From first call to booked meeting — see how teams are putting Skadi
+            to work.
           </p>
         </div>
 

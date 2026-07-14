@@ -122,15 +122,14 @@ export default function FAQ() {
               FAQ
             </div>
             <h2 className="mt-5 text-[30px] font-normal leading-[1.15] tracking-[-1px] sm:text-[38px] lg:text-[42px]">
-              Everything you need to know about{" "}
+              Everything You&apos;re Wondering{" "}
               <span className="serif-italic gradient-serif">
-                Skadi&apos;s AI voice agents.
+                Before You Switch
               </span>
             </h2>
             <p className="mt-5 text-[15px] leading-relaxed text-skadi-muted sm:text-base">
-              Common questions from service business owners evaluating AI call
-              handling — setup, security, integrations, and what happens on
-              every call.
+              Everything founders and CXOs ask before rolling out an AI voice
+              agent — security, integrations, and what happens on every call.
             </p>
           </div>
 

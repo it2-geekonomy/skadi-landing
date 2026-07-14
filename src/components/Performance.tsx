@@ -176,8 +176,8 @@ export default function Performance() {
                 <span className="serif-italic gradient-serif">like yours.</span>
               </h2>
               <p className="mt-5 max-w-[560px] text-[15px] leading-relaxed text-skadi-muted">
-                Skadi handles every call with consistency, speed, and accuracy
-                — so your team can focus on the work, not the phone.
+                From answer speed to booking rate, see exactly how Skadi
+                performs for businesses like yours.
               </p>
             </div>
 

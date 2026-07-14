@@ -37,9 +37,9 @@ const mediumStars = [
 ];
 
 const benefits = [
-  "Answers every call in seconds — 24/7",
-  "Qualifies leads and books on your calendar",
-  "Live QA, sentiment, and call analytics",
+  "Zero missed opportunities, even after hours",
+  "Only qualified leads land on your calendar",
+  "Every call scored and tracked, automatically",
 ];
 
 function VectorStar({
@@ -145,16 +145,17 @@ export default function Hero() {
             </div>
 
             <h1 className="mt-6 text-[36px] font-medium leading-[1.15] tracking-[-1px] sm:text-[48px] lg:text-[56px] xl:text-[64px]">
-              Never{" "}
-              <span className="serif-italic italic-green">Miss</span> Another
-              Customer{" "}
-              <span className="serif-italic italic-white">Call</span>
-              <span className="serif-italic italic-dot">.</span>
+              Every Call{" "}
+              <span className="serif-italic italic-green">Answered.</span>
+              <br />
+              Every Lead{" "}
+              <span className="serif-italic italic-white">Booked.</span>
             </h1>
 
-            <p className="mt-5 max-w-[480px] text-[15px] leading-relaxed text-skadi-muted sm:text-base">
-              Skadi answers every call, qualifies leads, and books appointments
-              automatically — 24/7.
+            <p className="mt-5 max-w-[520px] text-[15px] leading-relaxed text-skadi-muted sm:text-base">
+              Skadi&apos;s AI voice agent picks up 24/7, qualifies the caller,
+              and puts them straight on your calendar — no missed revenue, no
+              manual follow-up.
             </p>
 
             <ul className="mt-7 flex flex-col gap-3">

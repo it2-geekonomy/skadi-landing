@@ -39,7 +39,7 @@ export default function HeroReportCard() {
         </p>
         <Link
           href="/report"
-          className="mt-4 inline-flex items-center gap-1.5 text-[14px] font-medium text-[#abbe9c] transition hover:text-white sm:text-[15px]"
+          className="btn-demo mt-5 inline-flex items-center justify-center gap-2 px-6 py-3 text-[14px] font-semibold sm:text-[15px]"
         >
           Read the Report
           <span aria-hidden>→</span>

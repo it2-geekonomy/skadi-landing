@@ -50,11 +50,8 @@ export default function DemoRequestForm() {
   return (
     <div className="w-full rounded-[18px] border border-white/10 bg-[#0a0a0a]/80 p-6 backdrop-blur-sm sm:p-8">
       <h3 className="text-[22px] font-medium text-white sm:text-[26px]">
-        Get a live demo
+        Book Your 15-Minute Demo
       </h3>
-      <p className="mt-2 text-[14px] text-skadi-muted sm:text-[15px]">
-        We&apos;ll reach out within one business day to schedule.
-      </p>
 
       <form className="mt-6 sm:mt-8" onSubmit={handleSubmit}>
         <div className="mb-[18px] flex flex-col gap-[18px] sm:flex-row sm:gap-4">
