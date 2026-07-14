@@ -145,9 +145,9 @@ export default function Integrations() {
           {integrations.map((item) => (
             <div
               key={item.name}
-              className="flex flex-col items-center justify-center rounded-2xl border border-white/[0.08] bg-[#0c120a]/60 px-4 py-6 text-center transition duration-200 hover:border-[#6e964f]/35 hover:bg-[#0c120a]"
+              className="flex flex-col items-center justify-center rounded-2xl border border-[#6e964f]/30 bg-[rgba(8,14,7,0.25)] px-4 py-6 text-center transition duration-200 hover:border-[#6e964f]/45 hover:bg-[rgba(8,14,7,0.4)]"
             >
-              <div className="mb-3 flex h-14 w-14 items-center justify-center rounded-2xl border border-white/[0.08] bg-white/[0.06]">
+              <div className="mb-3 flex h-14 w-14 items-center justify-center rounded-2xl bg-white/[0.06]">
                 {item.icon}
               </div>
               <p className="text-[14px] font-medium text-white sm:text-[15px]">
