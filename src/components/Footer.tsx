@@ -10,7 +10,8 @@ type FooterLink = {
 
 const productLinks: FooterLink[] = [
   { label: "Features", href: "/#features" },
-  { label: "How It Works", href: "/#how-it-works" },
+  { label: "How We're Different", href: "/#how-were-different" },
+  { label: "Integrations", href: "/#integrations" },
   { label: "Live Performance", href: "/#performance" },
   { label: "Missed Calls", href: "/#missed" },
   { label: "Testimonials", href: "/#testimonials" },
