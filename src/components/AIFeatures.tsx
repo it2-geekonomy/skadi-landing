@@ -244,34 +244,23 @@ export default function AIFeatures() {
             </ol>
           </div>
 
-          {/* Right — image inside dark padded frame */}
+          {/* Right — feature images */}
           <div className="mx-auto w-full max-w-[520px] sm:mx-0 sm:flex-1 sm:max-w-[580px] md:max-w-[620px] lg:max-w-[640px] xl:max-w-[720px]">
-            {/* Outer dark frame */}
             <div
+              className="relative overflow-hidden rounded-2xl"
               style={{
-                background: "rgba(20,24,20,0.95)",
-                boxShadow: "0 32px 80px rgba(0,0,0,0.6)",
-                padding: "clamp(12px, 2.5vw, 48px)",
-                borderRadius: "clamp(16px, 2vw, 24px)",
+                opacity: imgVisible ? 1 : 0,
+                transition: "opacity 0.3s ease",
               }}
             >
-              {/* Inner image with its own rounded corners */}
-              <div
-                className="relative overflow-hidden rounded-2xl"
-                style={{
-                  opacity: imgVisible ? 1 : 0,
-                  transition: "opacity 0.3s ease",
-                }}
-              >
-                <div className="relative aspect-[16/10] w-full">
-                  <Image
-                    src={steps[active].image}
-                    alt={steps[active].title}
-                    fill
-                    className="object-cover"
-                    priority={active === 0}
-                  />
-                </div>
+              <div className="relative aspect-[16/10] w-full">
+                <Image
+                  src={steps[active].image}
+                  alt={steps[active].title}
+                  fill
+                  className="object-cover"
+                  priority={active === 0}
+                />
               </div>
             </div>
           </div>
