@@ -7,27 +7,27 @@ const steps = [
   {
     title: "AI Answers Instantly",
     desc: "Calls are answered in under 3 seconds, 24/7 — every lead gets a live response, instantly.",
-    image: "/images/Let AI Handle Every Customer Conversation/Let AI Handle image1.png",
+    image: "/images/ai-features/ai-answers.png",
   },
   {
     title: "Appointment / Demo Scheduling",
     desc: "Qualified leads are booked directly into your calendar in real time, without human intervention.",
-    image: "/images/Let AI Handle Every Customer Conversation/Let AI Handle image2.png",
+    image: "/images/ai-features/appointment.png",
   },
   {
     title: "Live Transcripts",
     desc: "Every conversation is transcribed instantly, so your team knows exactly what was said and promised.",
-    image: "/images/Let AI Handle Every Customer Conversation/Let AI Handle image3.png",
+    image: "/images/ai-features/transcripts.png",
   },
   {
     title: "CRM Automation",
     desc: "Call data, lead info, and outcomes sync automatically to your CRM — no manual entry, no dropped follow-ups.",
-    image: "/images/Let AI Handle Every Customer Conversation/Let AI Handle image4.png",
+    image: "/images/ai-features/crm.png",
   },
   {
     title: "Performance Analytics",
     desc: "One dashboard. Every metric that matters — call volume, quality, and booking rate, always up to date.",
-    image: "/images/Let AI Handle Every Customer Conversation/Let AI Handle image5.png",
+    image: "/images/ai-features/analytics.png",
   },
 ];
 
