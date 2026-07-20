@@ -4,9 +4,9 @@ import Image from "next/image";
 import { FormEvent, useState } from "react";
 
 const highlights = [
-  "Answers every call in seconds",
-  "Qualifies leads and books appointments",
-  "Runs 24/7 — nights, weekends, holidays",
+  "Never miss an inbound call",
+  "Qualify every lead automatically",
+  "Book appointments 24/7",
 ];
 
 const glassCard =
@@ -88,8 +88,8 @@ export default function AIVoiceAgentForBusiness() {
             AI Voice Agent for Business · Live 24/7
           </div>
           <h2 className="mt-5 text-[30px] font-normal leading-[1.15] tracking-[-1px] sm:text-[38px] lg:text-[44px]">
-            Hear Skadi in action.{" "}
-            <span className="serif-italic gradient-serif">Call yourself.</span>
+            Hear{" "}
+            <span className="serif-italic gradient-serif">Skadi in action.</span>
           </h2>
           <p className="mx-auto mt-4 max-w-[560px] text-[15px] leading-relaxed text-skadi-muted sm:text-base">
             Enter your number and our AI call automation agent will ring you in
@@ -110,8 +110,9 @@ export default function AIVoiceAgentForBusiness() {
             </p>
 
             <p className="mt-6 text-[15px] leading-relaxed text-white/75 sm:text-base">
-              Our AI answers every call instantly, qualifies leads, and books
-              appointments — so you capture more revenue without adding headcount.
+              Every inbound call is answered instantly, qualified intelligently,
+              and converted into booked appointments, so your team can focus on
+              closing, not chasing.
             </p>
 
             <form
@@ -162,7 +163,11 @@ export default function AIVoiceAgentForBusiness() {
               </p>
             )}
 
-            <ul className="mt-8 flex flex-col gap-3 border-t border-white/[0.08] pt-8">
+            <div className="mt-8 border-t border-white/[0.08] pt-8">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#abbe9c]">
+                Benefits
+              </p>
+              <ul className="mt-4 flex flex-col gap-3">
               {highlights.map((item) => (
                 <li
                   key={item}
@@ -185,7 +190,8 @@ export default function AIVoiceAgentForBusiness() {
                   {item}
                 </li>
               ))}
-            </ul>
+              </ul>
+            </div>
           </div>
 
           <div className="relative flex min-h-[280px] flex-col justify-center lg:min-h-0">
@@ -201,25 +207,13 @@ export default function AIVoiceAgentForBusiness() {
             <div className="relative overflow-hidden rounded-3xl border border-[#6e964f]/30 shadow-[0_20px_60px_rgba(0,0,0,0.5)]">
               <div className="relative aspect-[16/10] w-full">
                 <Image
-                  src="/images/AI VOICE AGENT FOR BUSINESS.webp"
-                  alt="Business team celebrating a successful customer call handled by Skadi"
+                  src="/images/skadi-ai-desk-interface.png"
+                  alt="Skadi AI voice agent interface on laptop and phone during an active call"
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"
                   className="object-cover object-center"
                   priority={false}
                 />
-              </div>
-              <div
-                className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"
-                aria-hidden="true"
-              />
-              <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6">
-                <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#abbe9c]">
-                  Real conversations. Real bookings.
-                </p>
-                <p className="mt-1 max-w-sm text-sm leading-snug text-white/90">
-                  Every answered call is a lead captured — not lost to voicemail.
-                </p>
               </div>
             </div>
           </div>
