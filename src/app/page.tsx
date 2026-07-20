@@ -7,7 +7,7 @@ import Integrations from "@/components/Integrations";
 import AIFeatures from "@/components/AIFeatures";
 import HowWereDifferent from "@/components/HowWereDifferent";
 import Performance from "@/components/Performance";
-import Testimonials from "@/components/Testimonials";
+import AIVoiceAgentForBusiness from "@/components/AI VOICE AGENT FOR BUSINESS";
 import Contact from "@/components/Contact";
 import FAQ from "@/components/FAQ";
 import Footer from "@/components/Footer";
@@ -24,7 +24,7 @@ export default function Home() {
       {/* <HowItWorks /> */}
       <Features />
       <Integrations />
-      <Testimonials />
+      <AIVoiceAgentForBusiness />
       <Contact />
       <FAQ />
       <Footer />
