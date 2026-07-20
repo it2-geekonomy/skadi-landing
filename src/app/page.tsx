@@ -7,7 +7,7 @@ import Integrations from "@/components/Integrations";
 import AIFeatures from "@/components/AIFeatures";
 import HowWereDifferent from "@/components/HowWereDifferent";
 import Performance from "@/components/Performance";
-import AIVoiceAgentForBusiness from "@/components/AI VOICE AGENT FOR BUSINESS";
+import AIVoiceAgentForBusiness from "@/components/AIVoiceAgentForBusiness";
 import Contact from "@/components/Contact";
 import FAQ from "@/components/FAQ";
 import Footer from "@/components/Footer";
