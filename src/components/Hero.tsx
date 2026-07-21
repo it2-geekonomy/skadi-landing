@@ -146,10 +146,10 @@ export default function Hero() {
 
             <h1 className="mt-6 text-[36px] font-medium leading-[1.15] tracking-[-1px] sm:text-[48px] lg:text-[56px] xl:text-[64px]">
               Every Call{" "}
-              <span className="serif-italic italic-green">Answered.</span>
+              <span className="serif-italic hero-headline-accent">Answered.</span>
               <br />
               Every Lead{" "}
-              <span className="serif-italic italic-white">Booked.</span>
+              <span className="serif-italic hero-headline-accent">Booked.</span>
             </h1>
 
             <p className="mt-5 max-w-[520px] text-[15px] leading-relaxed text-skadi-muted sm:text-base">

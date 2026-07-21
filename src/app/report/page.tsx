@@ -26,25 +26,25 @@ export default function ReportPage() {
         />
 
         <div className="container-main relative z-[1]">
-          <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-2 lg:gap-12 xl:gap-16">
+          <div className="badge border border-white/[0.06]">
+            <span className="badge-dot" />
+            Industry Recognition
+          </div>
+          <h1 className="mt-5 text-[32px] font-normal leading-tight tracking-[-1px] sm:text-[42px] lg:text-[44px] xl:text-[48px]">
+            Recognized as a{" "}
+            <span className="serif-italic gradient-serif">Pioneering</span>{" "}
+            Solution
+          </h1>
+          <p className="mt-4 max-w-[520px] text-[15px] leading-relaxed text-skadi-muted sm:text-base">
+            Independent landscape analysis of AI voice agents — where Skadi sits
+            for customer confidence, automation capability, and fit for service
+            businesses that can&apos;t afford missed calls.
+          </p>
+
+          <div className="mt-8 grid grid-cols-1 items-start gap-6 lg:grid-cols-2 lg:gap-8">
             {/* Left — report preview */}
             <div className="min-w-0">
-              <div className="badge border border-white/[0.06]">
-                <span className="badge-dot" />
-                Industry Recognition
-              </div>
-              <h1 className="mt-5 text-[32px] font-normal leading-tight tracking-[-1px] sm:text-[42px] lg:text-[44px] xl:text-[48px]">
-                Recognized as a{" "}
-                <span className="serif-italic gradient-serif">Pioneering</span>{" "}
-                Solution
-              </h1>
-              <p className="mt-4 max-w-[520px] text-[15px] leading-relaxed text-skadi-muted sm:text-base">
-                Independent landscape analysis of AI voice agents — where Skadi
-                sits for customer confidence, automation capability, and fit for
-                service businesses that can&apos;t afford missed calls.
-              </p>
-
-              <div className="mt-8 overflow-hidden rounded-2xl border border-white/10 bg-black">
+              <div className="overflow-hidden rounded-2xl border border-white/10 bg-black">
                 <div className="relative aspect-square w-full">
                   <Image
                     src="/images/Skadi-Report-Image.png"
