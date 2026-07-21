@@ -30,7 +30,11 @@ body {
   }
 
   .section-pad {
-    @apply py-[100px];
+    @apply pt-16 pb-0 lg:pt-20 xl:pt-[100px];
+  }
+
+  main > section.section-pad:last-of-type {
+    @apply pb-16 lg:pb-20 xl:pb-[100px];
   }
 
   .serif-italic {

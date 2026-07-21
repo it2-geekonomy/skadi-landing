@@ -123,7 +123,7 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative overflow-hidden bg-black pb-16 pt-[68px] lg:pb-24"
+      className="relative overflow-hidden bg-black pb-0 pt-[68px]"
     >
       <HeroAurora />
       <HeroStars />

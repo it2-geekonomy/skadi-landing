@@ -245,7 +245,7 @@ export default function AIFeatures() {
           </div>
 
           {/* Right — feature images */}
-          <div className="mx-auto w-full max-w-[520px] sm:mx-0 sm:flex-1 sm:max-w-[580px] md:max-w-[620px] lg:max-w-[640px] xl:max-w-[720px]">
+          <div className="w-full min-w-0 sm:flex-1">
             <div
               className="relative overflow-hidden rounded-2xl border border-[#6e964f]/40"
               style={{
@@ -253,17 +253,16 @@ export default function AIFeatures() {
                 transition: "opacity 0.3s ease",
               }}
             >
-              <div className="relative aspect-[16/10] w-full">
-                <Image
-                  src={steps[active].image}
-                  alt={steps[active].title}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 1024px) 100vw, 720px"
-                  quality={100}
-                  priority={active === 0}
-                />
-              </div>
+              <Image
+                src={steps[active].image}
+                alt={steps[active].title}
+                width={760}
+                height={425}
+                className="block h-auto w-full"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                quality={100}
+                priority={active === 0}
+              />
             </div>
           </div>
         </div>

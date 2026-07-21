@@ -64,7 +64,7 @@ export default function DemoPage() {
                 See Skadi live in{" "}
                 <span className="serif-italic gradient-serif">15 minutes.</span>
               </h1>
-              <div className="mt-10 flex-1 relative overflow-hidden rounded-[18px] border border-white/10 bg-[#0a0a0a]/80 shadow-lg min-h-[250px]">
+              <div className="mt-10 w-full overflow-hidden rounded-2xl border border-[#6e964f]/40">
                 <video
                   src="/demo%20video.mp4"
                   autoPlay
@@ -73,7 +73,7 @@ export default function DemoPage() {
                   playsInline
                   disablePictureInPicture
                   disableRemotePlayback
-                  className="pointer-events-none absolute inset-0 w-full h-full object-cover"
+                  className="block h-auto w-full"
                 />
               </div>
             </div>

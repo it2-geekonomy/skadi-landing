@@ -89,7 +89,7 @@ export default function Contact() {
   }
 
   return (
-    <section id="demo" className="bg-black pb-20 pt-16 sm:pb-[140px] sm:pt-[100px]">
+    <section id="demo" className="section-pad bg-black">
       <div className="container-main">
         <div className="relative overflow-hidden rounded-2xl border border-white/[0.08] bg-black p-5 sm:rounded-3xl sm:p-8 lg:p-20">
           <ContactGlow />
