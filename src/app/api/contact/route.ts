@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
-import { getCallVolumeLabel } from "@/lib/report";
+import { submitLeadToCrm } from "@/lib/crm";
+import { isValidCallVolume } from "@/lib/report";
 
 type ContactPayload = {
   firstName?: string;
@@ -15,6 +16,7 @@ type ContactPayload = {
 
 const DEFAULT_SOURCE = "Skadi Website Contact Form";
 const REPORT_SOURCE = "Skadi Industry Report";
+const DEMO_SOURCE = "Skadi Demo Page";
 
 function splitName(full: string): { firstName: string; lastName: string } {
   const parts = full.trim().split(/\s+/).filter(Boolean);
@@ -27,18 +29,6 @@ function splitName(full: string): { firstName: string; lastName: string } {
 }
 
 export async function POST(request: Request) {
-  const apiUrl = process.env.CRM_API_URL;
-  const apiKey = process.env.CRM_API_KEY;
-  const orgId = process.env.CRM_ORG_ID;
-
-  if (!apiUrl || !apiKey || !orgId) {
-    console.error("Missing CRM environment variables");
-    return NextResponse.json(
-      { error: "Server configuration error" },
-      { status: 500 },
-    );
-  }
-
   let body: ContactPayload;
   try {
     body = await request.json();
@@ -52,6 +42,7 @@ export async function POST(request: Request) {
   const jobTitle = body.jobTitle?.trim() ?? "";
   const source = body.source?.trim() || DEFAULT_SOURCE;
   const isReportLead = source === REPORT_SOURCE;
+  const isDemoLead = source === DEMO_SOURCE;
   const callVolume = body.callVolume?.trim() ?? "";
 
   let firstName = body.firstName?.trim() ?? "";
@@ -77,9 +68,23 @@ export async function POST(request: Request) {
     );
   }
 
-  if (!isReportLead && !phone) {
+  if ((isDemoLead || !isReportLead) && !phone) {
     return NextResponse.json(
       { error: "All fields are required" },
+      { status: 400 },
+    );
+  }
+
+  if (isDemoLead && !callVolume) {
+    return NextResponse.json(
+      { error: "Please select your inbound call volume." },
+      { status: 400 },
+    );
+  }
+
+  if (isDemoLead && !isValidCallVolume(callVolume)) {
+    return NextResponse.json(
+      { error: "Please select your inbound call volume." },
       { status: 400 },
     );
   }
@@ -91,68 +96,24 @@ export async function POST(request: Request) {
     );
   }
 
-  const fullName = `${firstName} ${lastName}`.trim();
-  const client =
-    company ||
-    (email.includes("@") ? (email.split("@")[1] ?? "Unknown") : "Unknown");
-
-  const title = isReportLead
-    ? jobTitle || "Industry Report Request"
-    : "Demo Request";
-
   try {
-    const crmPayload: Record<string, string> = {
-      name: fullName,
+    await submitLeadToCrm({
       firstName,
       lastName,
       email,
-      client,
-      title,
+      phone,
       source,
-    };
-
-    if (callVolume) {
-      crmPayload.callVolume = getCallVolumeLabel(callVolume) ?? callVolume;
-    }
-
-    if (phone) {
-      crmPayload.phone = phone;
-    } else if (isReportLead) {
-      crmPayload.phone = "N/A";
-    }
-
-    const crmResponse = await fetch(apiUrl, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "x-api-key": apiKey,
-        "x-organization-id": orgId,
-      },
-      body: JSON.stringify(crmPayload),
+      company,
+      jobTitle: isReportLead ? jobTitle : "Demo Request",
+      callVolume: isDemoLead ? callVolume : undefined,
     });
-
-    if (!crmResponse.ok) {
-      const errorText = await crmResponse.text();
-      let errorDetail = errorText;
-      try {
-        const errorJson = JSON.parse(errorText) as { message?: string };
-        errorDetail = errorJson.message ?? errorText;
-      } catch {
-        // keep raw text
-      }
-      console.error("CRM API error:", crmResponse.status, errorDetail);
-      return NextResponse.json(
-        { error: "Failed to submit. Please try again." },
-        { status: 502 },
-      );
-    }
 
     return NextResponse.json({ success: true }, { status: 201 });
   } catch (error) {
     console.error("Contact form error:", error);
     return NextResponse.json(
-      { error: "Something went wrong. Please try again." },
-      { status: 500 },
+      { error: "Failed to submit. Please try again." },
+      { status: 502 },
     );
   }
 }

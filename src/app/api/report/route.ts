@@ -2,12 +2,13 @@ import { readFile } from "fs/promises";
 import path from "path";
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
+import { submitLeadToCrm } from "@/lib/crm";
 import {
   isValidCallVolume,
   REPORT_PDF_FILENAME,
   REPORT_PDF_URL,
+  REPORT_SOURCE,
 } from "@/lib/report";
-
 type ReportPayload = {
   firstName?: string;
   lastName?: string;
@@ -132,19 +133,6 @@ export async function POST(request: Request) {
   const fromEmail =
     process.env.RESEND_FROM_EMAIL ?? "Skadi <noreply@theskadi.com>";
 
-  // CRM — re-enable when external leads API is ready
-  // const apiUrl = process.env.CRM_API_URL;
-  // const apiKey = process.env.CRM_API_KEY;
-  // const orgId = process.env.CRM_ORG_ID;
-  //
-  // if (!apiUrl || !apiKey || !orgId) {
-  //   console.error("Missing CRM environment variables");
-  //   return NextResponse.json(
-  //     { error: "Server configuration error" },
-  //     { status: 500 },
-  //   );
-  // }
-
   if (!resendApiKey) {
     console.error("Missing RESEND_API_KEY");
     return NextResponse.json(
@@ -152,7 +140,6 @@ export async function POST(request: Request) {
       { status: 500 },
     );
   }
-
   let body: ReportPayload;
   try {
     body = await request.json();
@@ -188,44 +175,17 @@ export async function POST(request: Request) {
   }
 
   try {
-    // CRM — re-enable when external leads API is ready
-    // const callVolumeLabel = getCallVolumeLabel(callVolume)!;
-    // const fullName = `${firstName} ${lastName}`.trim();
-    // const client = email.includes("@")
-    //   ? (email.split("@")[1] ?? "Unknown")
-    //   : "Unknown";
-    //
-    // const crmResponse = await fetch(apiUrl, {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     "x-api-key": apiKey,
-    //     "x-organization-id": orgId,
-    //   },
-    //   body: JSON.stringify({
-    //     name: fullName,
-    //     firstName,
-    //     lastName,
-    //     email,
-    //     phone: "N/A",
-    //     client,
-    //     title: jobTitle,
-    //     source: REPORT_SOURCE,
-    //     callVolume: callVolumeLabel,
-    //   }),
-    // });
-    //
-    // if (!crmResponse.ok) {
-    //   const errorText = await crmResponse.text();
-    //   console.error("CRM API error:", crmResponse.status, errorText);
-    //   return NextResponse.json(
-    //     { error: "Failed to submit. Please try again." },
-    //     { status: 502 },
-    //   );
-    // }
+    await submitLeadToCrm({
+      firstName,
+      lastName,
+      email,
+      phone: "99999999",
+      source: REPORT_SOURCE,
+      jobTitle,
+      callVolume,
+    });
 
-    const pdfBuffer = await readReportPdf();
-    const resend = new Resend(resendApiKey);
+    const pdfBuffer = await readReportPdf();    const resend = new Resend(resendApiKey);
 
     const emailResult = await resend.emails.send({
       from: fromEmail,
@@ -258,8 +218,8 @@ export async function POST(request: Request) {
   } catch (error) {
     console.error("Report form error:", error);
     return NextResponse.json(
-      { error: "Something went wrong. Please try again." },
-      { status: 500 },
+      { error: "Failed to submit. Please try again." },
+      { status: 502 },
     );
   }
 }
