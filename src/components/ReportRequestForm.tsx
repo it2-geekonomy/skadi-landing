@@ -76,8 +76,7 @@ export default function ReportRequestForm() {
         Get the full report
       </h3>
       <p className="mt-2 text-[14px] text-skadi-muted sm:text-[15px]">
-        Enter your details and we&apos;ll email you the industry report — your
-        download will start right away.
+        Enter your details and we&apos;ll email you the industry report.
       </p>
 
       <form className="mt-6 min-w-0 sm:mt-8" onSubmit={handleSubmit}>

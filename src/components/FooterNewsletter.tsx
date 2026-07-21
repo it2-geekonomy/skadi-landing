@@ -24,9 +24,36 @@ export default function FooterNewsletter() {
       </p>
 
       {status === "success" ? (
-        <p className="mt-5 text-sm text-[#abbe9c]">
-          Thanks — you&apos;re on the list.
-        </p>
+        <div className="mt-5">
+          <h4 className="text-[20px] font-medium tracking-[-0.3px] text-white sm:text-[22px]">
+            You&apos;re Subscribed! 🎉
+          </h4>
+          <p className="mt-2 text-[15px] font-medium text-white">
+            Thank you for subscribing to our newsletter.
+          </p>
+          <p className="mt-3 text-[14px] leading-relaxed text-skadi-muted sm:text-[15px]">
+            You&apos;ll now receive the latest updates, insights, product news,
+            and exclusive content directly in your inbox. Keep an eye on your
+            email—we&apos;ve got exciting things coming your way!
+          </p>
+          <p className="mt-5 text-[14px] text-skadi-muted sm:text-[15px]">
+            <Link
+              href="/"
+              className="font-medium text-white transition hover:text-[#6e964f]"
+            >
+              Back home
+            </Link>{" "}
+            or{" "}
+            <a
+              href="https://thegeekonomy.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-medium text-[#abbe9c] underline underline-offset-2 transition hover:text-[#6e964f]"
+            >
+              explore our website
+            </a>
+          </p>
+        </div>
       ) : (
         <form className="mt-5 w-full" onSubmit={handleSubmit}>
           <label htmlFor="footer-email" className="sr-only">
