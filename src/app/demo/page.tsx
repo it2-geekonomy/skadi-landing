@@ -66,7 +66,7 @@ export default function DemoPage() {
               </h1>
               <div className="mt-10 flex-1 relative overflow-hidden rounded-[18px] border border-white/10 bg-[#0a0a0a]/80 shadow-lg min-h-[250px]">
                 <video
-                  src="/0_Woman_Business_1920x1010.mp4"
+                  src="/demo%20video.mp4"
                   autoPlay
                   loop
                   muted

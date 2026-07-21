@@ -130,7 +130,7 @@ export default function Hero() {
 
       <div className="container-main relative z-[2]">
         <div className="flex min-h-[calc(100vh-68px)] w-full flex-col items-center justify-center py-10 lg:py-16">
-          <div className="flex w-full flex-col items-stretch gap-10 lg:flex-row lg:items-stretch lg:gap-12 xl:gap-16">
+          <div className="flex w-full flex-col items-stretch gap-10 md:flex-row md:items-stretch lg:gap-12 xl:gap-16">
             {/* Left — copy + CTAs */}
             <div className="flex min-w-0 flex-[1.15] flex-col justify-center text-left">
               <div className="hero-eyebrow self-start">
@@ -175,26 +175,11 @@ export default function Hero() {
                 <Link href="/demo" className="btn-demo">
                   Book a Demo
                 </Link>
-                {/* <button
-                  type="button"
-                  className="btn-action"
-                  onClick={() => {
-                    setDeckMessage(true);
-                    window.setTimeout(() => setDeckMessage(false), 3200);
-                  }}
-                >
-                  Download Deck
-                </button> */}
               </div>
-              {/* {deckMessage && (
-                <p className="mt-3 text-sm text-skadi-muted" role="status">
-                  Deck coming soon — we&apos;ll add the PDF when it&apos;s ready.
-                </p>
-              )} */}
             </div>
 
             {/* Right — industry report card */}
-            <div className="w-full shrink-0 lg:max-w-[420px] xl:max-w-[460px]">
+            <div className="w-full shrink-0 md:max-w-[340px] lg:max-w-[420px] xl:max-w-[460px]">
               <HeroReportCard />
             </div>
           </div>
