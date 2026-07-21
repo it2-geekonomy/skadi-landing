@@ -4,22 +4,14 @@ import Link from "next/link";
 export default function HeroReportCard() {
   return (
     <div className="w-full overflow-hidden rounded-[18px] border border-white/10 bg-[#0a0a0a]/80 backdrop-blur-sm">
-      <div className="relative aspect-[16/11] w-full overflow-hidden bg-[#080e07]">
+      <div className="relative aspect-square w-full overflow-hidden bg-black">
         <Image
           src="/images/Skadi-Report-Image.png"
-          alt="Skadi Market Landscape — AI Voice Agent Capability Matrix"
+          alt="The True Cost of a Missed Call — Skadi industry research report"
           fill
-          className="object-cover object-top"
+          className="object-contain object-center"
           sizes="(max-width: 1024px) 100vw, 460px"
           priority
-        />
-        <div
-          className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3"
-          style={{
-            background:
-              "linear-gradient(180deg, transparent 0%, rgba(10,10,10,0.92) 100%)",
-          }}
-          aria-hidden
         />
       </div>
 

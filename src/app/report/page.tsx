@@ -44,23 +44,23 @@ export default function ReportPage() {
                 service businesses that can&apos;t afford missed calls.
               </p>
 
-              <div className="mt-8 overflow-hidden rounded-2xl border border-white/10 bg-[#0a0a0a]">
-                <div className="relative aspect-[16/11] w-full sm:aspect-[4/3]">
+              <div className="mt-8 overflow-hidden rounded-2xl border border-white/10 bg-black">
+                <div className="relative aspect-square w-full">
                   <Image
                     src="/images/Skadi-Report-Image.png"
-                    alt="Skadi Market Landscape — AI Voice Agent Capability Matrix"
+                    alt="The True Cost of a Missed Call — Skadi industry research report"
                     fill
-                    className="object-cover object-top"
+                    className="object-contain object-center"
                     sizes="(max-width: 1024px) 100vw, 50vw"
                     priority
                   />
                 </div>
                 <div className="border-t border-white/[0.06] px-5 py-4 sm:px-6">
                   <p className="text-[14px] font-medium text-white sm:text-[15px]">
-                    Skadi Market Landscape
+                    The True Cost of a Missed Call
                   </p>
                   <p className="mt-1 text-[13px] text-skadi-muted">
-                    AI Voice Agent Capability Matrix
+                    Independent research report for service businesses
                   </p>
                 </div>
               </div>

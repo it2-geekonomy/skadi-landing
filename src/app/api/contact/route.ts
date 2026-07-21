@@ -110,6 +110,8 @@ export async function POST(request: Request) {
 
     if (phone) {
       crmPayload.phone = phone;
+    } else if (isReportLead) {
+      crmPayload.phone = "N/A";
     }
 
     const crmResponse = await fetch(apiUrl, {
