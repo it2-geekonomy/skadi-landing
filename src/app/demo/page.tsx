@@ -78,46 +78,8 @@ export default function DemoPage() {
               </div>
             </div>
           </div>
-
-          {/* Testimonials */}
-          <div className="mt-16 border-t border-white/[0.08] pt-14 sm:mt-20">
-            <p className="mb-8 text-center text-sm uppercase tracking-wider text-skadi-muted">
-              What customers say
-            </p>
-            <div className="grid gap-5 md:grid-cols-3">
-              {demoTestimonials.map((t) => (
-                <blockquote
-                  key={t.name}
-                  className="rounded-2xl border border-[#6e964f]/30 bg-[#0c120a] p-6 text-left"
-                >
-                  <p className="text-[15px] leading-relaxed text-white/80">
-                    &ldquo;{t.quote.length > 180 ? `${t.quote.slice(0, 177)}…` : t.quote}&rdquo;
-                  </p>
-                  <div className="mt-5 flex items-center gap-3">
-                    <div className="h-10 w-10 shrink-0 overflow-hidden rounded-full">
-                      <Image
-                        src={t.avatar}
-                        alt={t.name}
-                        width={40}
-                        height={40}
-                        className="h-full w-full object-cover"
-                      />
-                    </div>
-                    <div>
-                      <p className="text-sm font-semibold text-white">{t.name}</p>
-                      <p className="text-xs text-skadi-muted">{t.company}</p>
-                    </div>
-                  </div>
-                </blockquote>
-              ))}
-            </div>
-          </div>
-
-          {/* Calendly embed placeholder — add when marketing provides the URL */}
-          {/* <div id="scheduler" className="mt-16">…</div> */}
         </div>
       </section>
-
       <Footer />
     </main>
   );

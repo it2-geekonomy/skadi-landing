@@ -129,72 +129,74 @@ export default function Hero() {
       <HeroStars />
 
       <div className="container-main relative z-[2]">
-        <div className="flex min-h-[calc(100vh-68px)] flex-col items-stretch gap-10 py-10 lg:flex-row lg:items-center lg:gap-12 lg:py-16 xl:gap-16">
-          {/* Left — copy + CTAs */}
-          <div className="flex min-w-0 flex-[1.15] flex-col text-left">
-            <div className="hero-eyebrow self-start">
-              <Image
-                src="/images/Vector green.svg"
-                alt=""
-                width={11}
-                height={11}
-                className="h-[11px] w-[11px] shrink-0"
-                aria-hidden
-              />
-              AI Voice Agent for Growing Businesses
-            </div>
+        <div className="flex min-h-[calc(100vh-68px)] w-full flex-col items-center justify-center py-10 lg:py-16">
+          <div className="flex w-full flex-col items-stretch gap-10 lg:flex-row lg:items-stretch lg:gap-12 xl:gap-16">
+            {/* Left — copy + CTAs */}
+            <div className="flex min-w-0 flex-[1.15] flex-col justify-center text-left">
+              <div className="hero-eyebrow self-start">
+                <Image
+                  src="/images/Vector green.svg"
+                  alt=""
+                  width={11}
+                  height={11}
+                  className="h-[11px] w-[11px] shrink-0"
+                  aria-hidden
+                />
+                AI Voice Agent for Growing Businesses
+              </div>
 
-            <h1 className="mt-6 text-[36px] font-medium leading-[1.15] tracking-[-1px] sm:text-[48px] lg:text-[56px] xl:text-[64px]">
-              Every Call{" "}
-              <span className="serif-italic hero-headline-accent">Answered.</span>
-              <br />
-              Every Lead{" "}
-              <span className="serif-italic hero-headline-accent">Booked.</span>
-            </h1>
+              <h1 className="mt-6 text-[36px] font-medium leading-[1.15] tracking-[-1px] sm:text-[48px] lg:text-[56px] xl:text-[64px]">
+                Every Call{" "}
+                <span className="serif-italic hero-headline-accent">Answered.</span>
+                <br />
+                Every Lead{" "}
+                <span className="serif-italic hero-headline-accent">Booked.</span>
+              </h1>
 
-            <p className="mt-5 max-w-[520px] text-[15px] leading-relaxed text-skadi-muted sm:text-base">
-              Skadi&apos;s AI voice agent picks up 24/7, qualifies the caller,
-              and puts them straight on your calendar — no missed revenue, no
-              manual follow-up.
-            </p>
-
-            <ul className="mt-7 flex flex-col gap-3">
-              {benefits.map((b) => (
-                <li
-                  key={b}
-                  className="flex items-start gap-2.5 text-[14px] text-skadi-faint sm:text-[15px]"
-                >
-                  <TickIcon />
-                  {b}
-                </li>
-              ))}
-            </ul>
-
-            <div className="mt-9 flex flex-wrap items-center gap-3">
-              <Link href="/demo" className="btn-demo">
-                Book a Demo
-              </Link>
-              {/* <button
-                type="button"
-                className="btn-action"
-                onClick={() => {
-                  setDeckMessage(true);
-                  window.setTimeout(() => setDeckMessage(false), 3200);
-                }}
-              >
-                Download Deck
-              </button> */}
-            </div>
-            {/* {deckMessage && (
-              <p className="mt-3 text-sm text-skadi-muted" role="status">
-                Deck coming soon — we&apos;ll add the PDF when it&apos;s ready.
+              <p className="mt-5 max-w-[520px] text-[15px] leading-relaxed text-skadi-muted sm:text-base">
+                Skadi&apos;s AI voice agent picks up 24/7, qualifies the caller,
+                and puts them straight on your calendar — no missed revenue, no
+                manual follow-up.
               </p>
-            )} */}
-          </div>
 
-          {/* Right — industry report card */}
-          <div className="w-full shrink-0 lg:max-w-[420px] xl:max-w-[460px]">
-            <HeroReportCard />
+              <ul className="mt-7 flex flex-col gap-3">
+                {benefits.map((b) => (
+                  <li
+                    key={b}
+                    className="flex items-start gap-2.5 text-[14px] text-skadi-faint sm:text-[15px]"
+                  >
+                    <TickIcon />
+                    {b}
+                  </li>
+                ))}
+              </ul>
+
+              <div className="mt-9 flex flex-wrap items-center gap-3">
+                <Link href="/demo" className="btn-demo">
+                  Book a Demo
+                </Link>
+                {/* <button
+                  type="button"
+                  className="btn-action"
+                  onClick={() => {
+                    setDeckMessage(true);
+                    window.setTimeout(() => setDeckMessage(false), 3200);
+                  }}
+                >
+                  Download Deck
+                </button> */}
+              </div>
+              {/* {deckMessage && (
+                <p className="mt-3 text-sm text-skadi-muted" role="status">
+                  Deck coming soon — we&apos;ll add the PDF when it&apos;s ready.
+                </p>
+              )} */}
+            </div>
+
+            {/* Right — industry report card */}
+            <div className="w-full shrink-0 lg:max-w-[420px] xl:max-w-[460px]">
+              <HeroReportCard />
+            </div>
           </div>
         </div>
 

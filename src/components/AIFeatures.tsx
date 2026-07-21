@@ -247,7 +247,7 @@ export default function AIFeatures() {
           {/* Right — feature images */}
           <div className="mx-auto w-full max-w-[520px] sm:mx-0 sm:flex-1 sm:max-w-[580px] md:max-w-[620px] lg:max-w-[640px] xl:max-w-[720px]">
             <div
-              className="relative overflow-hidden rounded-2xl"
+              className="relative overflow-hidden rounded-2xl border border-[#6e964f]/40"
               style={{
                 opacity: imgVisible ? 1 : 0,
                 transition: "opacity 0.3s ease",
@@ -259,6 +259,8 @@ export default function AIFeatures() {
                   alt={steps[active].title}
                   fill
                   className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 720px"
+                  quality={100}
                   priority={active === 0}
                 />
               </div>

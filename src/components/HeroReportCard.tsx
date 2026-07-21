@@ -3,8 +3,8 @@ import Link from "next/link";
 
 export default function HeroReportCard() {
   return (
-    <div className="w-full overflow-hidden rounded-[18px] border border-white/10 bg-[#0a0a0a]/80 backdrop-blur-sm">
-      <div className="relative aspect-square w-full overflow-hidden bg-black">
+    <div className="flex h-full w-full flex-col overflow-hidden rounded-[18px] border border-white/10 bg-[#0a0a0a]/80 backdrop-blur-sm">
+      <div className="relative flex-1 min-h-[240px] w-full overflow-hidden bg-black">
         <Image
           src="/images/Skadi-Report-Image.png"
           alt="The True Cost of a Missed Call — Skadi industry research report"
@@ -15,7 +15,7 @@ export default function HeroReportCard() {
         />
       </div>
 
-      <div className="px-5 pb-5 pt-4 sm:px-6 sm:pb-6 sm:pt-5">
+      <div className="shrink-0 px-5 pb-5 pt-4 sm:px-6 sm:pb-6 sm:pt-5">
         <div className="badge border border-white/[0.06]">
           <span className="badge-dot" />
           Industry Recognition
@@ -29,13 +29,15 @@ export default function HeroReportCard() {
           See where Skadi sits in the AI voice agent landscape — and how we
           compare for service businesses.
         </p>
-        <Link
-          href="/report"
-          className="btn-demo mt-5 inline-flex items-center justify-center gap-2 px-6 py-3 text-[14px] font-semibold sm:text-[15px]"
-        >
-          Read the Report
-          <span aria-hidden>→</span>
-        </Link>
+        <div className="mt-9 flex flex-wrap items-center gap-3">
+          <Link
+            href="/report"
+            className="btn-demo inline-flex items-center justify-center gap-2 px-6 py-3 text-[14px] font-semibold sm:text-[14px]"
+          >
+            Read the Report
+            <span aria-hidden>→</span>
+          </Link>
+        </div>
       </div>
     </div>
   );

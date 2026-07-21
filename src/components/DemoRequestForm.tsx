@@ -2,6 +2,8 @@
 
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
+import { CallVolumeSelect, CALL_VOLUME_QUESTION } from "@/components/CallVolumeSelect";
+import { type CallVolumeValue } from "@/lib/report";
 
 export default function DemoRequestForm() {
   const router = useRouter();
@@ -9,6 +11,7 @@ export default function DemoRequestForm() {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+  const [callVolume, setCallVolume] = useState<CallVolumeValue | "">("");
   const [company, setCompany] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("");
@@ -17,6 +20,12 @@ export default function DemoRequestForm() {
     event.preventDefault();
     setStatus("loading");
     setErrorMessage("");
+
+    if (!callVolume) {
+      setStatus("error");
+      setErrorMessage("Please select your inbound call volume.");
+      return;
+    }
 
     try {
       const response = await fetch("/api/contact", {
@@ -27,6 +36,7 @@ export default function DemoRequestForm() {
           lastName,
           email,
           phone,
+          callVolume,
           company: company.trim() || undefined,
           source: "Skadi Demo Page",
         }),
@@ -56,7 +66,7 @@ export default function DemoRequestForm() {
       <form className="mt-6 sm:mt-8" onSubmit={handleSubmit}>
         <div className="mb-[18px] flex flex-col gap-[18px] sm:flex-row sm:gap-4">
           <div className="form-group relative min-w-0 flex-1">
-            <label htmlFor="demo-firstName"></label>
+            <label htmlFor="demo-firstName" className="sr-only">First Name</label>
             <input
               id="demo-firstName"
               type="text"
@@ -69,7 +79,7 @@ export default function DemoRequestForm() {
             />
           </div>
           <div className="form-group relative min-w-0 flex-1">
-            <label htmlFor="demo-lastName"></label>
+            <label htmlFor="demo-lastName" className="sr-only">Last Name</label>
             <input
               id="demo-lastName"
               type="text"
@@ -83,7 +93,7 @@ export default function DemoRequestForm() {
           </div>
         </div>
         <div className="form-group relative mb-[18px]">
-          <label htmlFor="demo-email"></label>
+          <label htmlFor="demo-email" className="sr-only">Email</label>
           <input
             id="demo-email"
             type="email"
@@ -96,7 +106,7 @@ export default function DemoRequestForm() {
           />
         </div>
         <div className="form-group relative mb-[18px]">
-          <label htmlFor="demo-phone"></label>
+          <label htmlFor="demo-phone" className="sr-only">Phone Number</label>
           <input
             id="demo-phone"
             type="tel"
@@ -108,8 +118,20 @@ export default function DemoRequestForm() {
             disabled={status === "loading"}
           />
         </div>
+
+        <div className="form-group relative mb-[18px] min-w-0">
+          <label htmlFor="demo-callVolume" className="sr-only">
+            {CALL_VOLUME_QUESTION}
+          </label>
+          <CallVolumeSelect
+            value={callVolume}
+            onChange={setCallVolume}
+            disabled={status === "loading"}
+          />
+        </div>
+
         <div className="form-group relative mb-2">
-          <label htmlFor="demo-company"></label>
+          <label htmlFor="demo-company" className="sr-only">Company</label>
           <input
             id="demo-company"
             type="text"

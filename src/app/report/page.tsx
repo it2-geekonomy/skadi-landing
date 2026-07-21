@@ -41,21 +41,21 @@ export default function ReportPage() {
             businesses that can&apos;t afford missed calls.
           </p>
 
-          <div className="mt-8 grid grid-cols-1 items-start gap-6 lg:grid-cols-2 lg:gap-8">
+          <div className="mt-8 grid grid-cols-1 items-stretch gap-6 lg:grid-cols-2 lg:gap-8">
             {/* Left — report preview */}
-            <div className="min-w-0">
-              <div className="overflow-hidden rounded-2xl border border-white/10 bg-black">
-                <div className="relative aspect-square w-full">
+            <div className="min-w-0 h-full">
+              <div className="flex h-full flex-col overflow-hidden rounded-2xl border border-white/10 bg-black">
+                <div className="relative w-full aspect-square lg:aspect-auto lg:flex-1 lg:min-h-[200px]">
                   <Image
                     src="/images/Skadi-Report-Image.png"
                     alt="The True Cost of a Missed Call — Skadi industry research report"
                     fill
-                    className="object-contain object-center"
+                    className="object-contain object-center p-4 sm:p-6"
                     sizes="(max-width: 1024px) 100vw, 50vw"
                     priority
                   />
                 </div>
-                <div className="border-t border-white/[0.06] px-5 py-4 sm:px-6">
+                <div className="shrink-0 border-t border-white/[0.06] px-5 py-4 sm:px-6">
                   <p className="text-[14px] font-medium text-white sm:text-[15px]">
                     The True Cost of a Missed Call
                   </p>

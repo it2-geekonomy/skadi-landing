@@ -2,6 +2,7 @@
 
 import { FormEvent, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 function ContactGrid() {
   return (
@@ -105,13 +106,12 @@ export default function Contact() {
             </p>
 
             {!showForm && (
-              <button
-                type="button"
+              <Link
+                href="/demo"
                 className="btn-demo mt-8 px-8 py-3.5 sm:mt-10 sm:px-10 sm:py-4"
-                onClick={handleGetStarted}
               >
                 Book a Demo
-              </button>
+              </Link>
             )}
 
             <div

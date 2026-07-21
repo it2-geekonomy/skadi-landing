@@ -75,10 +75,10 @@ export default function Features() {
               Full Platform
             </div>
             <h2 className="mt-5 text-[28px] font-normal leading-[1.2] tracking-[-0.5px] sm:text-[36px] sm:leading-tight sm:tracking-[-1px] lg:text-[42px]">
-              Everything you need.
+              All the right features.
               <br />
               <span className="serif-italic gradient-serif">
-                Nothing you don&apos;t.
+                None of the clutter.
               </span>
             </h2>
           </div>

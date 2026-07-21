@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { getCallVolumeLabel } from "@/lib/report";
 
 type ContactPayload = {
   firstName?: string;
@@ -9,6 +10,7 @@ type ContactPayload = {
   company?: string;
   jobTitle?: string;
   source?: string;
+  callVolume?: string;
 };
 
 const DEFAULT_SOURCE = "Skadi Website Contact Form";
@@ -50,6 +52,7 @@ export async function POST(request: Request) {
   const jobTitle = body.jobTitle?.trim() ?? "";
   const source = body.source?.trim() || DEFAULT_SOURCE;
   const isReportLead = source === REPORT_SOURCE;
+  const callVolume = body.callVolume?.trim() ?? "";
 
   let firstName = body.firstName?.trim() ?? "";
   let lastName = body.lastName?.trim() ?? "";
@@ -107,6 +110,10 @@ export async function POST(request: Request) {
       title,
       source,
     };
+
+    if (callVolume) {
+      crmPayload.callVolume = getCallVolumeLabel(callVolume) ?? callVolume;
+    }
 
     if (phone) {
       crmPayload.phone = phone;
