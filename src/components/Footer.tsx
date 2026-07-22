@@ -19,7 +19,7 @@ const productLinks: FooterLink[] = [
 
 const companyLinks: FooterLink[] = [
   { label: "Contact", href: "/#demo" },
-  { label: "Blog", href: "#" },
+  // { label: "Blog", href: "#" },
   { label: "Privacy Policy", href: "/privacy-policy" },
   { label: "Terms & Conditions", href: "/terms-and-conditions" },
 ];
