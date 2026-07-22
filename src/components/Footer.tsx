@@ -14,7 +14,6 @@ const productLinks: FooterLink[] = [
   { label: "Integrations", href: "/#integrations" },
   { label: "Live Performance", href: "/#performance" },
   { label: "Missed Calls", href: "/#missed" },
-  { label: "Testimonials", href: "/#testimonials" },
 ];
 
 const companyLinks: FooterLink[] = [
