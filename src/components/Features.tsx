@@ -3,14 +3,14 @@ import Link from "next/link";
 
 const features = [
   {
+    title: "Built for Your Business",
+    desc: "No generic scripts. Skadi is trained on your business, your services, your pricing, your tone.",
+    icon: "/images/chart-histogram (1) 1.svg",
+  },
+  {
     title: "Inbound Call Agent",
     desc: "Picks up every call. Qualifies, routes, and books without human intervention. Your number stays the same.",
     icon: "/images/Phone.svg",
-  },
-  {
-    title: "Outbound Batch Calls",
-    desc: "Upload a contact list. Skadi calls at scale for follow-ups, re-engagements, and seasonal campaigns.",
-    icon: "/images/Outbound.svg",
   },
   {
     title: "AI Quality Assurance",
@@ -75,21 +75,19 @@ export default function Features() {
               Full Platform
             </div>
             <h2 className="mt-5 text-[28px] font-normal leading-[1.2] tracking-[-0.5px] sm:text-[36px] sm:leading-tight sm:tracking-[-1px] lg:text-[42px]">
-              Everything you need.
+              All the right features.
               <br />
               <span className="serif-italic gradient-serif">
-                Nothing you don&apos;t.
+                None of the clutter.
               </span>
             </h2>
           </div>
           <div className="w-full max-w-[550px] lg:w-auto">
-            <p className="text-base font-light leading-relaxed text-skadi-faint">
-              Built for field service businesses in TX and FL. Every feature is
-              designed to keep your pipeline full while your team focuses on the
-              work.
+            <p className="text-xl sm:text-2xl font-light leading-relaxed text-skadi-faint">
+              Ready to stop losing calls?
             </p>
             <Link
-              href="#demo"
+              href="/demo"
               className="btn-demo mt-6 inline-flex items-center gap-2"
             >
               Book a Free Demo

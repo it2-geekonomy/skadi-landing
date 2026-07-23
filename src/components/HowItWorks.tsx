@@ -79,11 +79,10 @@ export default function HowItWorks() {
             {steps.map((item, i) => (
               <div
                 key={item.step}
-                className={`relative px-0 sm:px-4 lg:px-8 ${
-                  i < steps.length - 1
+                className={`relative px-0 sm:px-4 lg:px-8 ${i < steps.length - 1
                     ? "lg:border-r lg:border-white/[0.08]"
                     : ""
-                }`}
+                  }`}
               >
                 {/* dot on timeline */}
                 <div className="mb-0 flex justify-center lg:justify-start">

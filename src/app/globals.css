@@ -30,7 +30,11 @@ body {
   }
 
   .section-pad {
-    @apply py-[100px];
+    @apply pt-8 pb-0 sm:pt-16 lg:pt-20 xl:pt-[100px];
+  }
+
+  main > section.section-pad:last-of-type {
+    @apply pb-8 sm:pb-16 lg:pb-20 xl:pb-[100px];
   }
 
   .serif-italic {
@@ -98,6 +102,13 @@ body {
     background-clip: text;
   }
 
+  .hero-headline-accent {
+    background: linear-gradient(95deg, #ffffff 10%, #eef3ea 45%, #abbe9c 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
   .italic-dot {
     background: linear-gradient(90deg, #80a167, #1c4000);
     -webkit-background-clip: text;
@@ -120,5 +131,13 @@ body {
 
   .form-input:focus {
     border-color: var(--green);
+  }
+
+  .form-select {
+    @apply min-w-0 max-w-full appearance-none pr-11;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    font-size: clamp(12px, 2.4vw, 15px);
   }
 }

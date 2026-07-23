@@ -6,10 +6,17 @@ import { MetaPixelLead } from "@/components/MetaPixelLead";
 export const metadata: Metadata = {
   title: "Thank You — Skadi",
   description:
-    "We've received your demo request and will be in touch within one business day.",
+    "We've received your request and will be in touch within one business day.",
 };
 
-export default function ThankYouPage() {
+export default async function ThankYouPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ type?: string }>;
+}) {
+  const { type } = await searchParams;
+  const isReport = type === "report";
+
   return (
     <>
       <MetaPixelLead />
@@ -45,8 +52,9 @@ export default function ThankYouPage() {
           <span className="serif-italic gradient-serif">you!</span>
         </h1>
         <p className="mx-auto mt-4 max-w-[360px] text-[15px] leading-relaxed text-skadi-muted sm:text-base">
-          We&apos;ve received your demo request and will be in touch within one
-          business day.
+          {isReport
+            ? "Your report download should have started, and we've emailed you a copy as well."
+            : "We've received your demo request and will be in touch within one business day."}
         </p>
 
         <Link href="/" className="btn-demo mt-9 inline-block px-7 py-3">

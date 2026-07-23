@@ -1,12 +1,15 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import MissedCalls from "@/components/MissedCalls";
-import Solution from "@/components/Solution";
-import HowItWorks from "@/components/HowItWorks";
+// import HowItWorks from "@/components/HowItWorks";
 import Features from "@/components/Features";
+import Integrations from "@/components/Integrations";
+import AIFeatures from "@/components/AIFeatures";
+import HowWereDifferent from "@/components/HowWereDifferent";
 import Performance from "@/components/Performance";
-import Testimonials from "@/components/Testimonials";
+import AIVoiceAgentForBusiness from "@/components/AIVoiceAgentForBusiness";
 import Contact from "@/components/Contact";
+import FAQ from "@/components/FAQ";
 import Footer from "@/components/Footer";
 
 export default function Home() {
@@ -14,14 +17,17 @@ export default function Home() {
     <main className="min-h-screen bg-skadi-bg">
       <Navbar />
       <Hero />
-      <Solution />
-      <MissedCalls />
-      <HowItWorks />
-      <Features />
       <Performance />
-      <Testimonials />
+      <MissedCalls />
+      <HowWereDifferent />
+      <AIFeatures />
+      {/* <HowItWorks /> */}
+      <Features />
+      <Integrations />
+      <AIVoiceAgentForBusiness />
       <Contact />
-      {/* <Footer /> */}
+      <FAQ />
+      <Footer />
     </main>
   );
 }

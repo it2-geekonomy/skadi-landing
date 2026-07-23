@@ -105,7 +105,7 @@ function StatCard({
           {icon}
         </svg>
       </div>
-      <p className="text-[46px] font-bold leading-none text-white">{num}</p>
+      <p className="text-[32px] font-bold leading-none text-white sm:text-[43px]">{num}</p>
       <p className="mt-2 text-lg text-skadi-green">{label}</p>
       <p className="mt-[18px] text-sm font-light leading-relaxed text-skadi-faint">
         {desc}
