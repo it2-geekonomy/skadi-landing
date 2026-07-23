@@ -86,7 +86,7 @@ function MetricCell({
   return (
     <div className="min-w-0">
       <p
-        className="text-[40px] font-normal leading-none tracking-[-0.5px] text-white sm:text-[44px] lg:text-[42px] xl:text-[50px] 2xl:text-[56px]"
+        className="text-[28px] font-normal leading-none tracking-[-0.5px] text-white sm:text-[40px] lg:text-[42px] xl:text-[48px] 2xl:text-[56px]"
         aria-label={`${metric.end}${metric.suffix ?? metric.fraction ?? ""}`}
       >
         {display}
@@ -108,15 +108,13 @@ function MetricsGrid({ progress }: { progress: number }) {
         return (
           <div
             key={m.label}
-            className={`min-w-0 ${
-              mobileDivider
-                ? "border-l border-white/[0.1] pl-5 sm:pl-0"
-                : ""
-            } ${
-              desktopDivider
+            className={`min-w-0 ${mobileDivider
+              ? "border-l border-white/[0.1] pl-5 sm:pl-0"
+              : ""
+              } ${desktopDivider
                 ? "sm:border-l sm:border-white/[0.1] sm:pl-6 lg:pl-8 xl:pl-10"
                 : "sm:border-l-0"
-            }`}
+              }`}
           >
             <MetricCell metric={m} progress={progress} />
           </div>

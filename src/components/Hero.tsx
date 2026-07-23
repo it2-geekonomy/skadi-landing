@@ -42,7 +42,7 @@ export default function Hero() {
       <HeroAurora />
 
       <div className="container-main relative z-[2]">
-        <div className="flex min-h-[calc(100vh-68px)] w-full flex-col items-center justify-center py-10 lg:py-16">
+        <div className="flex w-full flex-col items-center justify-center pt-10 pb-0 md:pb-10 lg:py-16">
           <div className="flex w-full flex-col items-stretch gap-10 md:flex-row md:items-stretch lg:gap-12 xl:gap-16">
             {/* Left — copy + CTAs */}
             <div className="flex min-w-0 flex-[1.15] flex-col justify-center text-left">
@@ -58,7 +58,7 @@ export default function Hero() {
                 AI Voice Agent for Growing Businesses
               </div>
 
-              <h1 className="mt-6 text-[36px] font-medium leading-[1.15] tracking-[-1px] sm:text-[48px] lg:text-[56px] xl:text-[64px]">
+              <h1 className="mt-6 text-[32px] font-medium leading-[1.15] tracking-[-1px] sm:text-[40px] md:text-[48px] lg:text-[56px] xl:text-[64px]">
                 Every Call{" "}
                 <span className="serif-italic hero-headline-accent">Answered.</span>
                 <br />

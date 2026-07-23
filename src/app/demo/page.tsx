@@ -60,7 +60,7 @@ export default function DemoPage() {
                 <span className="badge-dot" />
                 Book a Free Demo
               </div>
-              <h1 className="mt-5 text-[32px] font-normal leading-tight tracking-[-1px] sm:text-[42px] lg:text-[44px] xl:text-[48px]">
+              <h1 className="mt-5 text-[28px] font-normal leading-tight tracking-[-1px] sm:text-[36px] lg:text-[38px] xl:text-[40px]">
                 See Skadi live in{" "}
                 <span className="serif-italic gradient-serif">15 minutes.</span>
               </h1>
