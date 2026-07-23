@@ -17,7 +17,7 @@ const productLinks: FooterLink[] = [
 ];
 
 const companyLinks: FooterLink[] = [
-  { label: "Contact", href: "/#demo" },
+  { label: "Contact", href: "/demo" },
   // { label: "Blog", href: "#" },
   { label: "Privacy Policy", href: "/privacy-policy" },
   { label: "Terms & Conditions", href: "/terms-and-conditions" },
@@ -113,7 +113,7 @@ export default function Footer() {
               appointments, and help service businesses capture more revenue—24/7.
             </p>
 
-            <div className="mt-8">
+            {/* <div className="mt-8">
               <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-white">
                 Follow Us
               </p>
@@ -139,7 +139,7 @@ export default function Footer() {
                   </svg>
                 </SocialIcon>
               </div>
-            </div>
+            </div> */}
           </div>
 
           {/* Newsletter — wider column */}
