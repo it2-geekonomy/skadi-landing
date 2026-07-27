@@ -13,7 +13,6 @@ type ReportPayload = {
   firstName?: string;
   lastName?: string;
   email?: string;
-  jobTitle?: string;
   callVolume?: string;
 };
 
@@ -150,10 +149,9 @@ export async function POST(request: Request) {
   const firstName = body.firstName?.trim() ?? "";
   const lastName = body.lastName?.trim() ?? "";
   const email = body.email?.trim() ?? "";
-  const jobTitle = body.jobTitle?.trim() ?? "";
   const callVolume = body.callVolume?.trim() ?? "";
 
-  if (!firstName || !lastName || !email || !jobTitle || !callVolume) {
+  if (!firstName || !lastName || !email || !callVolume) {
     return NextResponse.json(
       { error: "All fields are required" },
       { status: 400 },
@@ -181,11 +179,11 @@ export async function POST(request: Request) {
       email,
       phone: "99999999",
       source: REPORT_SOURCE,
-      jobTitle,
       callVolume,
     });
 
-    const pdfBuffer = await readReportPdf();    const resend = new Resend(resendApiKey);
+    const pdfBuffer = await readReportPdf();
+    const resend = new Resend(resendApiKey);
 
     const emailResult = await resend.emails.send({
       from: fromEmail,

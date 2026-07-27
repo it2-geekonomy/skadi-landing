@@ -6,10 +6,14 @@ export type CrmLeadInput = {
   email: string;
   phone: string;
   source: string;
-  jobTitle?: string;
-  company?: string;
   callVolume?: string;
 };
+
+function getDefaultTitle(source: string): string {
+  if (source.includes("Report")) return "Industry Report Request";
+  if (source.includes("Demo")) return "Demo Request";
+  return "Website Lead";
+}
 
 export async function submitLeadToCrm(input: CrmLeadInput): Promise<void> {
   const apiUrl = process.env.CRM_API_URL?.trim();
@@ -21,11 +25,9 @@ export async function submitLeadToCrm(input: CrmLeadInput): Promise<void> {
   }
 
   const fullName = `${input.firstName} ${input.lastName}`.trim();
-  const client =
-    input.company?.trim() ||
-    (input.email.includes("@")
-      ? (input.email.split("@")[1] ?? "Unknown")
-      : "Unknown");
+  const client = input.email.includes("@")
+    ? (input.email.split("@")[1] ?? "Unknown")
+    : "Unknown";
 
   const payload: Record<string, string> = {
     name: fullName,
@@ -34,7 +36,7 @@ export async function submitLeadToCrm(input: CrmLeadInput): Promise<void> {
     email: input.email,
     phone: input.phone,
     client,
-    title: input.jobTitle?.trim() || "Demo Request",
+    title: getDefaultTitle(input.source),
     source: input.source,
   };
 
