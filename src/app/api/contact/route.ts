@@ -8,14 +8,11 @@ type ContactPayload = {
   name?: string;
   email?: string;
   phone?: string;
-  company?: string;
-  jobTitle?: string;
   source?: string;
   callVolume?: string;
 };
 
 const DEFAULT_SOURCE = "Skadi Website Contact Form";
-const REPORT_SOURCE = "Skadi Industry Report";
 const DEMO_SOURCE = "Skadi Demo Page";
 
 function splitName(full: string): { firstName: string; lastName: string } {
@@ -38,10 +35,7 @@ export async function POST(request: Request) {
 
   const email = body.email?.trim() ?? "";
   const phone = body.phone?.trim() ?? "";
-  const company = body.company?.trim() ?? "";
-  const jobTitle = body.jobTitle?.trim() ?? "";
   const source = body.source?.trim() || DEFAULT_SOURCE;
-  const isReportLead = source === REPORT_SOURCE;
   const isDemoLead = source === DEMO_SOURCE;
   const callVolume = body.callVolume?.trim() ?? "";
 
@@ -61,14 +55,7 @@ export async function POST(request: Request) {
     );
   }
 
-  if (isReportLead && !jobTitle) {
-    return NextResponse.json(
-      { error: "Job title is required" },
-      { status: 400 },
-    );
-  }
-
-  if ((isDemoLead || !isReportLead) && !phone) {
+  if (!phone) {
     return NextResponse.json(
       { error: "All fields are required" },
       { status: 400 },
@@ -103,8 +90,6 @@ export async function POST(request: Request) {
       email,
       phone,
       source,
-      company,
-      jobTitle: isReportLead ? jobTitle : "Demo Request",
       callVolume: isDemoLead ? callVolume : undefined,
     });
 

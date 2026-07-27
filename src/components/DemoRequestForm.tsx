@@ -12,7 +12,6 @@ export default function DemoRequestForm() {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [callVolume, setCallVolume] = useState<CallVolumeValue | "">("");
-  const [company, setCompany] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -37,7 +36,6 @@ export default function DemoRequestForm() {
           email: email.trim(),
           phone: phone.trim(),
           callVolume,
-          company: company.trim() || undefined,
           source: "Skadi Demo Page",
         }),
       });
@@ -119,26 +117,13 @@ export default function DemoRequestForm() {
           />
         </div>
 
-        <div className="form-group relative mb-[18px] min-w-0">
+        <div className="form-group relative mb-2 min-w-0">
           <label htmlFor="demo-callVolume" className="sr-only">
             {CALL_VOLUME_QUESTION}
           </label>
           <CallVolumeSelect
             value={callVolume}
             onChange={setCallVolume}
-            disabled={status === "loading"}
-          />
-        </div>
-
-        <div className="form-group relative mb-2">
-          <label htmlFor="demo-company" className="sr-only">Company</label>
-          <input
-            id="demo-company"
-            type="text"
-            className="form-input"
-            placeholder="Your company"
-            value={company}
-            onChange={(e) => setCompany(e.target.value)}
             disabled={status === "loading"}
           />
         </div>

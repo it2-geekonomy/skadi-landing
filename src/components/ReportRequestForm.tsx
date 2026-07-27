@@ -1,13 +1,8 @@
 "use client";
 
-import { FormEvent, useEffect, useRef, useState } from "react";
+import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
-import {
-  CALL_VOLUME_OPTIONS,
-  REPORT_PDF_URL,
-  type CallVolumeValue,
-} from "@/lib/report";
-
+import { REPORT_PDF_URL, type CallVolumeValue } from "@/lib/report";
 import { CallVolumeSelect, CALL_VOLUME_QUESTION } from "@/components/CallVolumeSelect";
 
 function downloadReportPdf() {
@@ -24,7 +19,6 @@ export default function ReportRequestForm() {
   const router = useRouter();
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [jobTitle, setJobTitle] = useState("");
   const [email, setEmail] = useState("");
   const [callVolume, setCallVolume] = useState<CallVolumeValue | "">("");
   const [status, setStatus] = useState<"idle" | "loading" | "error">("idle");
@@ -49,7 +43,6 @@ export default function ReportRequestForm() {
           firstName: firstName.trim(),
           lastName: lastName.trim(),
           email: email.trim(),
-          jobTitle: jobTitle.trim(),
           callVolume,
         }),
       });
@@ -113,23 +106,6 @@ export default function ReportRequestForm() {
               autoComplete="family-name"
             />
           </div>
-        </div>
-
-        <div className="form-group relative mb-[18px]">
-          <label htmlFor="report-jobTitle" className="sr-only">
-            Job Title
-          </label>
-          <input
-            id="report-jobTitle"
-            type="text"
-            className="form-input"
-            placeholder="Operations Manager"
-            value={jobTitle}
-            onChange={(e) => setJobTitle(e.target.value)}
-            required
-            disabled={status === "loading"}
-            autoComplete="organization-title"
-          />
         </div>
 
         <div className="form-group relative mb-[18px] min-w-0">
