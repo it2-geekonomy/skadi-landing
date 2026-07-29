@@ -1,6 +1,6 @@
 import Script from "next/script";
 
-const GTM_ID = "GTM-NGVDXJ2S";
+const GTM_ID = "GTM-T624M6LD";
 
 export function GoogleTagManagerHead() {
   return (
