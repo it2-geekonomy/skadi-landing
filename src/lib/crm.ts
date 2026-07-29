@@ -7,6 +7,8 @@ export type CrmLeadInput = {
   phone: string;
   source: string;
   callVolume?: string;
+  fbc?: string | null;
+  fbp?: string | null;
 };
 
 function getDefaultTitle(source: string): string {
