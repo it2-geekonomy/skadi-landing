@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { submitLeadToCrm } from "@/lib/crm";
 import { isValidCallVolume } from "@/lib/report";
 
@@ -15,23 +15,44 @@ type ContactPayload = {
 const DEFAULT_SOURCE = "Skadi Website Contact Form";
 const DEMO_SOURCE = "Skadi Demo Page";
 
-function splitName(full: string): { firstName: string; lastName: string } {
+function splitName(full: string): {
+  firstName: string;
+  lastName: string;
+} {
   const parts = full.trim().split(/\s+/).filter(Boolean);
-  if (parts.length === 0) return { firstName: "", lastName: "" };
-  if (parts.length === 1) return { firstName: parts[0], lastName: parts[0] };
+
+  if (parts.length === 0) {
+    return { firstName: "", lastName: "" };
+  }
+
+  if (parts.length === 1) {
+    return {
+      firstName: parts[0],
+      lastName: parts[0],
+    };
+  }
+
   return {
     firstName: parts[0],
     lastName: parts.slice(1).join(" "),
   };
 }
 
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
   let body: ContactPayload;
+
   try {
     body = await request.json();
   } catch {
-    return NextResponse.json({ error: "Invalid request body" }, { status: 400 });
+    return NextResponse.json(
+      { error: "Invalid request body" },
+      { status: 400 },
+    );
   }
+
+  // Meta Pixel cookies. Missing values are expected for some visitors.
+  const fbc = request.cookies.get("_fbc")?.value ?? null;
+  const fbp = request.cookies.get("_fbp")?.value ?? null;
 
   const email = body.email?.trim() ?? "";
   const phone = body.phone?.trim() ?? "";
@@ -44,18 +65,12 @@ export async function POST(request: Request) {
 
   if ((!firstName || !lastName) && body.name?.trim()) {
     const split = splitName(body.name);
+
     if (!firstName) firstName = split.firstName;
     if (!lastName) lastName = split.lastName;
   }
 
-  if (!firstName || !lastName || !email) {
-    return NextResponse.json(
-      { error: "All fields are required" },
-      { status: 400 },
-    );
-  }
-
-  if (!phone) {
+  if (!firstName || !lastName || !email || !phone) {
     return NextResponse.json(
       { error: "All fields are required" },
       { status: 400 },
@@ -91,11 +106,14 @@ export async function POST(request: Request) {
       phone,
       source,
       callVolume: isDemoLead ? callVolume : undefined,
+      fbc,
+      fbp,
     });
 
     return NextResponse.json({ success: true }, { status: 201 });
   } catch (error) {
     console.error("Contact form error:", error);
+
     return NextResponse.json(
       { error: "Failed to submit. Please try again." },
       { status: 502 },

@@ -7,6 +7,8 @@ export type CrmLeadInput = {
   phone: string;
   source: string;
   callVolume?: string;
+  fbc?: string | null;
+  fbp?: string | null;
 };
 
 function getDefaultTitle(source: string): string {
@@ -29,7 +31,7 @@ export async function submitLeadToCrm(input: CrmLeadInput): Promise<void> {
     ? (input.email.split("@")[1] ?? "Unknown")
     : "Unknown";
 
-  const payload: Record<string, string> = {
+  const payload: Record<string, any> = {
     name: fullName,
     firstName: input.firstName,
     lastName: input.lastName,
@@ -39,6 +41,9 @@ export async function submitLeadToCrm(input: CrmLeadInput): Promise<void> {
     title: getDefaultTitle(input.source),
     source: input.source,
   };
+
+  if (input.fbc) payload.fbc = input.fbc;
+  if (input.fbp) payload.fbp = input.fbp;
 
   if (input.callVolume) {
     payload.monthlyInboundCallVolume =
